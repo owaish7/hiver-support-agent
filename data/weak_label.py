@@ -31,6 +31,8 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import config
+
+config.use_utf8_stdout()
 from agent.classify import classify
 from llm import LLMError
 

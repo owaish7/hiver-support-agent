@@ -24,6 +24,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import config
 
+config.use_utf8_stdout()
+
 HERE = Path(__file__).resolve().parent
 
 

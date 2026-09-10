@@ -7,6 +7,7 @@ is one file and one line, not a grep across the codebase.
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -59,3 +60,16 @@ DEV_SIZE = 60         # tuning happens here
 # test = the remaining 140. Frozen.
 
 SEED = 20260910       # every random draw in the project uses this
+
+
+def use_utf8_stdout() -> None:
+    """Windows consoles default to cp1252, which raises UnicodeEncodeError on the
+    first emoji or non-Latin character. Real support tweets are full of both, and the
+    hard stratum deliberately over-samples them -- so without this the labelling tool
+    dies partway through a session on exactly the rows that matter most.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass

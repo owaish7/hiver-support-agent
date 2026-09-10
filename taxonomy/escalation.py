@@ -44,6 +44,12 @@ REASONS = ["security_risk", "money_movement", "legal_or_reputational",
 # facts about our program, so they can never be the correct answer -- see ESCALATION.md.
 GROUND_TRUTH_REASONS = REASONS[:5]
 
+for _s in (sys.stdout, sys.stderr):  # real tweets contain emoji; Windows console is cp1252
+    try:
+        _s.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
+
 
 def _rx(*patterns: str) -> re.Pattern:
     return re.compile("|".join(patterns), re.IGNORECASE)
@@ -137,10 +143,17 @@ def validate(path: Path) -> int:
         print("  golden set is empty")
         return 0
 
-    schema_errors, disagreements, deliberate = [], [], 0
+    schema_errors, disagreements, pending = [], [], []
+    deliberate = 0
 
     for r in rows:
         rid = r.get("id", "?")
+
+        # An explicit "come back to this" outranks the presence of a note. Without this
+        # check a flagged row with any note at all was silently counted as a settled
+        # deliberate exception and never resurfaced.
+        if r.get("needs_review"):
+            pending.append((rid, r.get("text", "")[:80]))
 
         # Schema checks. These are real errors, not judgement calls.
         if r.get("should_escalate") and not r.get("escalation_reason"):
@@ -154,8 +167,9 @@ def validate(path: Path) -> int:
                       f"(runtime-only or unknown)"))
 
         v = apply_policy(r.get("text", ""), prior_messages=r.get("prior_messages", 0))
+        settled = bool(r.get("notes")) and not r.get("needs_review")
         if v.should_escalate != bool(r.get("should_escalate")):
-            if r.get("notes"):
+            if settled:
                 deliberate += 1
             else:
                 disagreements.append(
@@ -164,7 +178,7 @@ def validate(path: Path) -> int:
                           f"{'escalate' if r.get('should_escalate') else 'auto'}",
                      r.get("text", "")[:90]))
         elif v.should_escalate and reason and v.reason != reason:
-            if r.get("notes"):
+            if settled:
                 deliberate += 1
             else:
                 disagreements.append(
@@ -172,7 +186,15 @@ def validate(path: Path) -> int:
                      r.get("text", "")[:90]))
 
     print(f"\n  {len(rows)} labelled rows")
-    print(f"  {deliberate} deliberate exceptions (disagree with policy, notes written)")
+    print(f"  {deliberate} deliberate exceptions (disagree with policy, reason written)")
+
+    if pending:
+        print(f"\n  {len(pending)} rows marked for review -- "
+              f"python golden/label.py --review")
+        for rid, text in pending[:15]:
+            print(f"    {rid}  {text}")
+        if len(pending) > 15:
+            print(f"    ... and {len(pending) - 15} more")
 
     if schema_errors:
         print(f"\n  {len(schema_errors)} SCHEMA ERRORS -- these are bugs, fix them:")
@@ -191,7 +213,7 @@ def validate(path: Path) -> int:
     if not schema_errors and not disagreements:
         print("  no unexplained disagreements")
 
-    return len(schema_errors) + len(disagreements)
+    return len(schema_errors) + len(disagreements) + len(pending)
 
 
 def main() -> None:
