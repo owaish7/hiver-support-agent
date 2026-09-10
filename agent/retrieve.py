@@ -82,6 +82,27 @@ class Retriever:
                 for i in top if np.isfinite(scores[i])]
 
 
+    def by_ids(self, ids: list[str]) -> list[Evidence]:
+        """Rebuild the evidence a cached run saw, from the ids it recorded.
+
+        The judge has to check groundedness against the same five examples the drafter
+        was given, and the result cache stores only their ids. Looking them back up
+        keeps the cache small and, more importantly, keeps a single source of truth: if
+        the evidence text were copied into the cache it could drift from the index, and
+        the judge would be grading against something the drafter never saw.
+        """
+        pos = {str(t): i for i, t in enumerate(self.tweet_ids)}
+        out = []
+        for tid in ids:
+            i = pos.get(str(tid))
+            if i is not None:
+                out.append(Evidence(idx=i, tweet_id=str(self.tweet_ids[i]),
+                                    customer_text=str(self.customer_text[i]),
+                                    brand_reply=str(self.brand_reply[i]),
+                                    similarity=float("nan")))
+        return out
+
+
 @lru_cache(maxsize=1)
 def get_retriever() -> Retriever:
     """One index, loaded once. A 200-item eval must not reload 20k vectors 200 times."""
