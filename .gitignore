@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+
+# The raw Kaggle download. 500MB, never committed.
+data/twcs.csv
+data/raw/
+
+# Embedding index is rebuilt by data/build_index.py in ~60s.
+data/index.npz
