@@ -66,12 +66,19 @@ def main() -> None:
         normalize_embeddings=True,
     ).astype(np.float32)
 
+    # str, not object. Pandas hands back dtype=object for text columns, and numpy can
+    # only reload object arrays with allow_pickle=True -- which means unpickling
+    # arbitrary code to read your own data index. Casting to a fixed unicode dtype keeps
+    # the file loadable with pickling off, which is how retrieve.py opens it.
+    def text_col(name: str) -> np.ndarray:
+        return np.asarray(usable[name].astype(str).tolist(), dtype=np.str_)
+
     np.savez_compressed(
         config.INDEX_NPZ,
         vectors=vecs,
-        tweet_ids=usable["customer_tweet_id"].astype(str).to_numpy(),
-        customer_text=usable["customer_text"].astype(str).to_numpy(),
-        brand_reply=usable["brand_reply_text"].astype(str).to_numpy(),
+        tweet_ids=text_col("customer_tweet_id"),
+        customer_text=text_col("customer_text"),
+        brand_reply=text_col("brand_reply_text"),
     )
     size_mb = config.INDEX_NPZ.stat().st_size / 1e6
     print(f"  wrote {config.INDEX_NPZ.name}  {vecs.shape}  {size_mb:.1f} MB")

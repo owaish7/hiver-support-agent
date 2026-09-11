@@ -89,6 +89,20 @@ nearest neighbour of a golden item is itself at similarity 1.0, and the drafter 
 the exact reply it is about to be graded against. Caught by writing the test, not by
 reading the code.
 
+Excluding by id is the right guard and not a complete one. Two *different* customers
+writing near-identical complaints is legitimate evidence and should be retrieved — that is
+the system working. But if the same message text appears in the corpus twice under two
+ids, exclusion by id will not catch the second copy. Duplicate rate measured at `[TBD]`%;
+the effect is to make retrieval look slightly easier than it is, and it is listed in the
+report's misleading-numbers section rather than silently patched, because the fix
+(dropping near-duplicates) would also drop genuine repeat complaints.
+
+**15b. The index is stored as fixed-width unicode, not object arrays.**
+Pandas returns `dtype=object` for text columns, and numpy can only reload object arrays
+with `allow_pickle=True` — which means unpickling arbitrary code to read your own data
+file. Casting to `np.str_` keeps the index loadable with pickling off. Found by running
+`build_index.py` for real; it would have blocked setup at the first step.
+
 **16. The golden set is stratified, and the resulting bias is declared, not corrected.**
 140 random preserves natural prevalence; ~45 top up rare intents so their per-class
 numbers mean something; 15 are deliberately awkward. The top-up means the class mix in

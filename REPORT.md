@@ -219,7 +219,14 @@ Mandatory section, and the one I would read first if I were reviewing this.
    the weak labeller systematically misses was never offered for hand-labelling, so this
    answer key has a blind spot whose size I cannot measure from inside it.
 
-8. **Test-set exposure.** Tuning happened on dev; test was run `[TBD]` time(s). `[TBD]`
+8. **Near-duplicate messages make retrieval look easier than it is.** Retrieval excludes
+   each item's own row by id, but thousands of customers type near-identical complaints,
+   and `[TBD]`% of the corpus is an exact-text duplicate of another row. Matching two
+   different customers with the same problem is the system working correctly, so these
+   are not removed — but it does mean top-1 similarity is higher here than it would be
+   against genuinely unseen phrasing.
+
+9. **Test-set exposure.** Tuning happened on dev; test was run `[TBD]` time(s). `[TBD]`
 
 ---
 
