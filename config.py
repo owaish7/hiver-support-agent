@@ -78,14 +78,21 @@ GEN_MODEL = os.getenv("GEN_MODEL", "openai/gpt-oss-20b")
 JUDGE_PROVIDER = os.getenv("JUDGE_PROVIDER", "groq")
 JUDGE_MODEL = os.getenv("JUDGE_MODEL", "qwen/qwen3.8-27b")
 
-# Free-tier budget, measured not guessed: 1,000 requests/day per model.
-#   weak labels    400
-#   dev tuning     120   (60 items x classify+draft)
-#   test run       280   (140 items x classify+draft)
-#   external check 154   (2 per Banking77 intent)
-#                 ----
-#                  954   generator calls, under the cap
-# The judge is a different model and so has its own 1,000.
+# Free-tier budget. The binding limit is NOT requests, which was the first guess -- it is
+# TOKENS PER DAY. Measured from an actual 429:
+#
+#   openai/gpt-oss-20b   1,000 requests/day   200,000 tokens/day   8,000 tokens/minute
+#
+# Measured cost per item:
+#   classify   ~940 tokens   (848 of that is the taxonomy + boundary rules, fixed)
+#   draft    ~1,140 tokens   (291 system + ~365 evidence + output)
+#   ---------------------
+#   ~2,080 tokens per item with the escalation second-opinion call disabled
+#   ~3,010 tokens per item with it enabled -- which is why it now defaults off
+#
+# So a 140-item test run costs ~291k tokens and does NOT fit in one day. It is meant to
+# be run on a different day from dev tuning, which is the intended workflow anyway: tune
+# on dev, then touch test once. Stated here so the schedule is a decision, not a surprise.
 WEAK_LABEL_N = 400
 
 # ---------------------------------------------------------------- golden set

@@ -36,7 +36,18 @@ class SupportAgent:
 
     name = "system"
 
-    def __init__(self, *, ask_llm_escalation: bool = True):
+    def __init__(self, *, ask_llm_escalation: bool = False):
+        """ask_llm_escalation asks the model for its own reading of the escalation
+        policy. It is OFF by default because it decides nothing -- the deterministic
+        rules in taxonomy/escalation.py always win, and the model's opinion is only
+        recorded as `llm_disagreed` for analysis.
+
+        It costs about 930 tokens per item, roughly a third of the per-item budget, on a
+        free tier capped at 200,000 tokens per day. Paying a third of the eval budget for
+        a column that changes no outcome is the wrong trade. Turn it on deliberately when
+        the question is "is this policy written clearly enough for a model to apply it",
+        which is worth asking once rather than on every run.
+        """
         self.ask_llm_escalation = ask_llm_escalation
 
     def handle(self, text: str, *, item_id: str = "", prior_messages: int = 0
