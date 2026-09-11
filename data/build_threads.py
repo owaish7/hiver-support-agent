@@ -27,6 +27,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 
@@ -37,6 +38,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import config
 
 CHUNK = 250_000
+
+# Below this, the file is assumed to be sample.csv rather than twcs.csv. A module
+# constant so tests can lower it rather than having to fabricate a 50MB fixture.
+MIN_CSV_MB = 50
+
+_PUNT = re.compile(config.PUNT_PATTERN, re.IGNORECASE)
 COLS = ["tweet_id", "author_id", "inbound", "created_at", "text",
         "in_response_to_tweet_id"]
 
@@ -65,10 +72,10 @@ def is_substantive(text: str) -> bool:
     """
     if not isinstance(text, str):
         return False
-    low = text.lower()
-    if any(marker in low for marker in config.PUNT_MARKERS):
+    if _PUNT.search(text):
         return False
-    words = [w for w in low.split() if not w.startswith("@") and not w.startswith("http")]
+    words = [w for w in text.lower().split()
+             if not w.startswith("@") and not w.startswith("http")]
     return len(words) >= config.SUBSTANTIVE_MIN_WORDS
 
 
@@ -85,7 +92,7 @@ def extract_pairs(csv_path: Path, brands: list[str]) -> dict[str, pd.DataFrame]:
     # script runs cleanly and reports "0 pairs", which reads as "this brand has no data"
     # rather than "wrong file" -- a confusing way to lose an hour. Fail loudly instead.
     size_mb = csv_path.stat().st_size / 1e6
-    if size_mb < 50:
+    if size_mb < MIN_CSV_MB:
         raise SystemExit(
             f"\n  {csv_path.name} is only {size_mb:.2f} MB.\n"
             f"  That is almost certainly sample.csv, the 93-row preview on the Kaggle\n"
@@ -123,10 +130,14 @@ def extract_pairs(csv_path: Path, brands: list[str]) -> dict[str, pd.DataFrame]:
     parents: dict[str, dict] = {}
     for chunk in pd.read_csv(csv_path, usecols=COLS, chunksize=CHUNK,
                              dtype={"author_id": str, "text": str}):
-        chunk["_tid"] = chunk["tweet_id"].map(_norm_id)
-        hit = chunk[chunk["_tid"].isin(wanted_parents)]
+        # Name deliberately has no leading underscore: itertuples() renames any column
+        # starting with "_" to a positional name (_1, _2, ...), so row._tid would not
+        # exist. This only bites once a parent actually matches, which is why a fixture
+        # with no matching rows never surfaced it.
+        chunk["tid_norm"] = chunk["tweet_id"].map(_norm_id)
+        hit = chunk[chunk["tid_norm"].isin(wanted_parents)]
         for row in hit.itertuples(index=False):
-            parents[row._tid] = {
+            parents[row.tid_norm] = {
                 "customer_author_id": row.author_id,
                 "customer_text": row.text,
                 "created_at": row.created_at,

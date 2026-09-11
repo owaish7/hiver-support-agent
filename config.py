@@ -30,8 +30,23 @@ CANDIDATE_BRANDS = ["SpotifyCares", "AppleSupport", "Delta"]
 # than punting to a private channel. This threshold decides the brand choice, so it
 # is a decision, not a detail.
 SUBSTANTIVE_MIN_WORDS = 15
-PUNT_MARKERS = ["dm us", "dm me", "direct message", "send us a dm", "shoot us a dm",
-                "in a dm", "via dm", "pm us", "send us a private"]
+
+# Any reference to a private channel means the reply is not a self-contained public
+# resolution, however it is phrased.
+#
+# This started as a list of substrings ("dm us", "send us a dm", ...) and that was
+# measurably wrong. Sampling real replies found dozens of phrasings it missed -- "let's
+# hop into DM", "follow/DM your confirmation number", "us in DM", "info over DM" -- and
+# the miss rate was not equal across brands: 6.8% of Spotify's "substantive" replies were
+# really punts against 26.5% of Apple's. That inflated Apple's score by 15 points, enough
+# to move it from second place to third. A crude rule applied unevenly is worse than a
+# crude rule applied evenly, so this matches the channel reference itself rather than
+# trying to enumerate the ways of asking.
+PUNT_PATTERN = (
+    r"\bD\.?M\.?s?\b|direct message|private message|privately|"
+    r"\be-?mail us\b|\bcall us\b|\bgive us a call\b|\bphone us\b|"
+    r"\blive chat\b|\bchat with us\b|\bcontact us at\b"
+)
 
 # ---------------------------------------------------------------- retrieval
 

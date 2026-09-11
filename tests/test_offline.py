@@ -311,6 +311,83 @@ def _():
         "messages differing only by handle and number are one test case, not two"
 
 
+@check("threads: the punt rule catches the phrasings a substring list missed")
+def _():
+    from data.build_threads import is_substantive
+    # Every False case below was scored substantive by the original substring list, and
+    # the miss rate differed by brand (6.8% Spotify vs 26.5% Apple), which moved Apple
+    # from second place to third. A crude rule applied unevenly is worse than an even one.
+    punts = [
+        "Let's hop into DM and get to the bottom of this together right now for you",
+        "Could you please follow/DM your confirmation number so I can look into this",
+        "We can help with that, just send the info over DM and we will take a look",
+        "Happy to help, let us know in DM which iPhone model you are currently using",
+        "Sorry about this, please email us and our team will get back to you shortly",
+    ]
+    for t in punts:
+        assert not is_substantive(t), f"missed a punt: {t!r}"
+
+    real = [
+        "Try clearing your app cache in settings then restart the app and let us know",
+        "Licensing agreements can affect which music is available in your country, and "
+        "there is more information about how that works on our content page here",
+        # A real SpotifyCares reply, copied verbatim from the corpus.
+        "Hey there! What device, operating system, and Spotify version are you running? "
+        "Also, can you let us know more about what's happening? We'll see what we can "
+        "suggest /KM",
+    ]
+    for t in real:
+        assert is_substantive(t), f"wrongly rejected a real answer: {t!r}"
+
+    assert not is_substantive("Sorry about that!"), "too short to contain an instruction"
+
+
+@check("threads: pass 2 resolves parents, flags punts, drops mid-thread turns")
+def _():
+    import tempfile
+
+    import pandas as pd
+
+    import data.build_threads as bt
+    bt.MIN_CSV_MB = 0   # this fixture is bytes, not 500MB
+
+    rows = [
+        # root customer message + a substantive brand reply -> a usable pair
+        {"tweet_id": 1, "author_id": "TestBrand", "inbound": False, "created_at": "x",
+         "text": "Sorry about that! Try clearing your app cache in settings then restart "
+                 "it and let us know how you get on.",
+         "response_tweet_id": "", "in_response_to_tweet_id": 2},
+        {"tweet_id": 2, "author_id": "999", "inbound": True, "created_at": "x",
+         "text": "@TestBrand my songs keep skipping",
+         "response_tweet_id": 1, "in_response_to_tweet_id": ""},
+        # root + a DM punt -> still a pair, but flagged non-substantive
+        {"tweet_id": 3, "author_id": "TestBrand", "inbound": False, "created_at": "x",
+         "text": "Please DM us.", "response_tweet_id": "", "in_response_to_tweet_id": 4},
+        {"tweet_id": 4, "author_id": "998", "inbound": True, "created_at": "x",
+         "text": "@TestBrand charged twice",
+         "response_tweet_id": 3, "in_response_to_tweet_id": ""},
+        # a reply to a MID-THREAD customer turn -> must be excluded entirely
+        {"tweet_id": 5, "author_id": "TestBrand", "inbound": False, "created_at": "x",
+         "text": "Glad that worked, let us know if anything else comes up at all please.",
+         "response_tweet_id": "", "in_response_to_tweet_id": 6},
+        {"tweet_id": 6, "author_id": "999", "inbound": True, "created_at": "x",
+         "text": "@TestBrand ok thanks", "response_tweet_id": 5,
+         "in_response_to_tweet_id": 1},
+    ]
+    path = Path(tempfile.mkdtemp()) / "t.csv"
+    pd.DataFrame(rows).to_csv(path, index=False)
+
+    import contextlib
+    import io
+    with contextlib.redirect_stdout(io.StringIO()):
+        df = bt.extract_pairs(path, ["TestBrand"])["TestBrand"]
+
+    assert len(df) == 2, f"expected 2 root pairs, got {len(df)}"
+    assert list(df["is_substantive"]) == [True, False], "the DM punt must be flagged"
+    assert "ok thanks" not in " ".join(df["customer_text"]), (
+        "a mid-thread turn inherits the intent above it and must not become an item")
+
+
 @check("external check: Banking77 sampling is stratified and deterministic")
 def _():
     import pandas as pd

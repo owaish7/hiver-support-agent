@@ -97,7 +97,12 @@ def load_golden(split: str) -> list[dict]:
 
 def run_config(name: str, rows: list[dict], force: bool) -> dict:
     cache = {} if force else load_cache(name)
-    todo = [r for r in rows if r["id"] not in cache]
+    # Retry anything that errored. Errors stay in the cache so the reason is visible, but
+    # a cached error is not a result: on a rate-limited free tier transient failures are
+    # normal, and treating them as done would silently shrink the eval to whatever
+    # fraction happened to succeed -- while still printing a confident table.
+    todo = [r for r in rows
+            if r["id"] not in cache or cache[r["id"]].get("error")]
     if not todo:
         print(f"[{name}] all {len(cache)} cached")
         return cache
@@ -221,6 +226,13 @@ def report(summaries: list[dict], metrics: list[dict], rows: list[dict],
             f"{s['reply_rate']:>7.0%}{s['tok']:>7.0f}{s['lat']:>6.1f}"
         )
     print("-" * 100)
+    bad = [s for s in summaries if s.get("errors")]
+    if bad:
+        print("  ERRORS -- these items were retried and still failed. Re-run to retry;")
+        print("  any number below is computed on the rows that succeeded:")
+        for s in bad:
+            print(f"    {s['config']:<26}{s['errors']} of {s['n']}")
+        print("-" * 100)
     for name in CONFIGS:
         if any(s["config"] == name and s["n"] for s in summaries):
             print(f"  {name:<26}{BLURB[name]}")
