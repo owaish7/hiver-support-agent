@@ -1,0 +1,55 @@
+{
+  "1989945": {
+    "id": "1989945",
+    "text": "hey, @SpotifyCares, please please please give us a “hide band” option. Sometimes I just really NEVER want to listen to a band, you know?",
+    "intent": "product_feedback",
+    "intent_confidence": 0.95,
+    "runner_up": null,
+    "retrieved_ids": [
+      "64373",
+      "1010849",
+      "2008248",
+      "1003772",
+      "1811053"
+    ],
+    "top_similarity": 0.7561519742012024,
+    "reply": "Hi! We're afraid this isn't possible right now, but you can show your support for the idea on our Community: https://t.co/oGDLtirXki /AU",
+    "evidence_ids": [
+      4
+    ],
+    "should_escalate": false,
+    "escalation_reason": null,
+    "escalation_source": null,
+    "input_tokens": 2827,
+    "output_tokens": 937,
+    "latency_s": 28.47,
+    "error": null
+  },
+  "166674": {
+    "id": "166674",
+    "text": "Can @115888 fix the android app so that it doesn't pause other android apps if Spotify is changing song on a completely different device?",
+    "intent": "app_bug",
+    "intent_confidence": 0.95,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1806092",
+      "1282998",
+      "2456326",
+      "711274",
+      "1264075"
+    ],
+    "top_similarity": 0.7272804975509644,
+    "reply": "Hey! Could you let us know your device model, Android version, and Spotify app version? We'll see what we can do.",
+    "evidence_ids": [
+      0,
+      1
+    ],
+    "should_escalate": false,
+    "escalation_reason": null,
+    "escalation_source": null,
+    "input_tokens": 2778,
+    "output_tokens": 671,
+    "latency_s": 1.58,
+    "error": null
+  }
+}

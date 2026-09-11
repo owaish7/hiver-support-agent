@@ -205,32 +205,54 @@ def _():
 
 # ---------------------------------------------------------------- leakage
 
-@check("LEAKAGE: B2 training excludes every golden id")
+@check("LEAKAGE: B2 trains on dev only and never reads test")
 def _():
+    import tempfile
+
     import baselines.tfidf_lr as b2
-    tmp = Path(tempfile.mkdtemp())
-    weak, golden = tmp / "weak.jsonl", tmp / "golden.jsonl"
-    with weak.open("w", encoding="utf-8") as fh:
-        for i in range(50):
-            fh.write(json.dumps({"id": f"t{i}", "text": f"msg {i}",
-                                 "weak_intent": "playback_issue"}) + "\n")
-    with golden.open("w", encoding="utf-8") as fh:
-        for i in range(0, 50, 5):
-            fh.write(json.dumps({"id": f"t{i}", "text": f"msg {i}",
-                                 "intent": "playback_issue"}) + "\n")
-    old_weak, old_golden = b2.WEAK, config.GOLDEN_JSONL
+    tmp = Path(tempfile.mkdtemp()) / "golden.jsonl"
+    rows = ([{"id": f"d{i}", "text": f"dev msg {i}", "intent": "playback_issue",
+              "split": "dev"} for i in range(10)]
+            + [{"id": f"t{i}", "text": f"test msg {i}", "intent": "app_bug",
+                "split": "test"} for i in range(20)])
+    tmp.write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
+
+    old = config.GOLDEN_JSONL
     try:
-        b2.WEAK, config.GOLDEN_JSONL = weak, golden
-        held = b2.golden_ids()
-        X_all, _ = b2._load(set())
-        X_kept, _ = b2._load(held)
-        assert len(held) == 10
-        assert len(X_all) == 50
-        assert len(X_kept) == 40, (
-            f"got {len(X_kept)}: the weak pool and the golden pool come from the same "
-            f"rows, so without this exclusion B2 is tested on its own training data.")
+        config.GOLDEN_JSONL = tmp
+        X, y = b2._load("dev")
+        assert len(X) == 10, f"expected the 10 dev rows, got {len(X)}"
+        assert set(y) == {"playback_issue"}, (
+            "a test-split label leaked into training: the two splits were fixed before "
+            "any label existed precisely so this cannot happen")
+        assert all("test msg" not in x for x in X)
     finally:
-        b2.WEAK, config.GOLDEN_JSONL = old_weak, old_golden
+        config.GOLDEN_JSONL = old
+
+
+@check("LEAKAGE: the trivial baseline reads its majority class from dev, not test")
+def _():
+    import tempfile
+
+    import baselines.trivial as b0
+    tmp = Path(tempfile.mkdtemp()) / "golden.jsonl"
+    # test is dominated by app_bug; dev by playback_issue. A baseline that peeked at the
+    # answer key would answer app_bug.
+    rows = ([{"id": f"d{i}", "text": "x", "intent": "playback_issue", "split": "dev"}
+             for i in range(9)]
+            + [{"id": "d9", "text": "x", "intent": "other", "split": "dev"}]
+            + [{"id": f"t{i}", "text": "x", "intent": "app_bug", "split": "test"}
+               for i in range(40)])
+    tmp.write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
+
+    old = config.GOLDEN_JSONL
+    try:
+        config.GOLDEN_JSONL = tmp
+        assert b0.majority_intent() == "playback_issue", (
+            "answered with the TEST split's majority class -- a trivial baseline that "
+            "peeks is not a floor, it is a lie about how hard the task is")
+    finally:
+        config.GOLDEN_JSONL = old
 
 
 @check("LEAKAGE: retrieval excludes the query's own row")

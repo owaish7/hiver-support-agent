@@ -6,16 +6,18 @@ is frequent in THIS message and rare across the corpus, so "refund" carries sign
 has no idea what any word means. That is precisely why it is the right thing to beat:
 whatever the LLM is worth, it is worth the gap between these two rows.
 
-Trained on the LLM's weak labels rather than on hand labels, for two reasons:
+Trained on the 60 hand-labelled DEV rows and tested on the 90 TEST rows. The two splits
+are disjoint and were fixed before any label existed, so there is no leakage.
 
-  * 200 hand labels split into dev/test leaves ~60 to train on, which is not enough for
-    8 classes and would understate this baseline unfairly.
-  * training on the golden set and testing on it would be circular.
+The original plan was to train on LLM weak labels instead, to get more training data. That
+plan died on contact: the weak labels were generated against an earlier version of the
+taxonomy and name classes that no longer exist, and regenerating 400 of them would cost
+roughly 376k tokens against a 200k daily cap.
 
-Golden ids are excluded from training explicitly (see `_load`), because the weak-label
-pool and the golden pool are drawn from the same 20k rows and overlap by construction.
-Without that exclusion this baseline would be tested on rows it trained on and the
-comparison would be meaningless in the flattering direction.
+Training on 60 rows across 11 classes is genuinely thin -- about 5 examples per class --
+so this baseline is weaker here than a fairer budget would make it. That understates the
+"do you even need an LLM" comparison, and the report says so rather than presenting the
+gap as if it were free of that handicap.
 
 What this row actually measures: how much of the LLM's accuracy survives distillation
 into something that costs nothing and answers in about three milliseconds. If the gap is
@@ -39,26 +41,19 @@ WEAK = HERE.parent / "data" / "weak_labels.jsonl"
 MODEL_PKL = HERE / "tfidf_lr.pkl"
 
 
-def _load(exclude_ids: set[str]) -> tuple[list[str], list[str]]:
-    if not WEAK.exists():
-        raise SystemExit("data/weak_labels.jsonl not found -- run data/weak_label.py")
+def _load(split: str = "dev") -> tuple[list[str], list[str]]:
+    """Rows from one split only. Never reads test."""
+    if not config.GOLDEN_JSONL.exists():
+        raise SystemExit("golden/golden.jsonl not found -- run golden/label.py")
     X, y = [], []
-    for line in WEAK.read_text(encoding="utf-8").splitlines():
+    for line in config.GOLDEN_JSONL.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         r = json.loads(line)
-        if r.get("weak_intent") and r["id"] not in exclude_ids:
+        if r.get("split") == split and r.get("intent"):
             X.append(r["text"])
-            y.append(r["weak_intent"])
+            y.append(r["intent"])
     return X, y
-
-
-def golden_ids() -> set[str]:
-    if not config.GOLDEN_JSONL.exists():
-        return set()
-    return {json.loads(l)["id"]
-            for l in config.GOLDEN_JSONL.read_text(encoding="utf-8").splitlines()
-            if l.strip()}
 
 
 def train() -> None:
@@ -66,18 +61,17 @@ def train() -> None:
     from sklearn.linear_model import LogisticRegression
     from sklearn.pipeline import Pipeline
 
-    excluded = golden_ids()
-    X, y = _load(excluded)
+    X, y = _load("dev")
     if len(set(y)) < 2:
-        raise SystemExit("weak labels contain fewer than 2 classes -- nothing to learn")
+        raise SystemExit("dev split has fewer than 2 classes -- nothing to learn")
 
-    print(f"  training on {len(X)} weak-labelled messages "
-          f"({len(excluded)} golden ids held out)")
+    print(f"  training on {len(X)} hand-labelled dev rows, {len(set(y))} classes "
+          f"(test split never read)")
 
     pipe = Pipeline([
         ("tfidf", TfidfVectorizer(
             ngram_range=(1, 2),   # bigrams catch "log in", "charged twice"
-            min_df=2,             # a word seen once cannot generalise, only memorise
+            min_df=1,             # 60 training rows: min_df=2 discards most of the vocabulary
             sublinear_tf=True,    # 10 mentions of "refund" is not 10x one mention
             strip_accents="unicode",
             lowercase=True,

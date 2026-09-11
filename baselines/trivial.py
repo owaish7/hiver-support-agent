@@ -15,10 +15,15 @@ would be a choice about which failure to hide:
 Whenever a system claims high escalation recall, the question is what it cost in
 auto-handle rate, and always_escalate is the row that makes that question concrete.
 
-The majority intent is computed from the WEAK-LABELLED pool, never from the golden set.
-Taking it from the answer key would make this baseline an oracle -- it would be reading
-the test set's own class distribution, and a "trivial" baseline that peeks is not a
-floor, it is a lie about how hard the task is.
+The majority intent is computed from the DEV split only, never from test. Taking it from
+the test set would make this baseline an oracle -- it would be reading the answer key's
+own class distribution, and a "trivial" baseline that peeks is not a floor, it is a lie
+about how hard the task is.
+
+Dev rather than the weak-labelled pool because the weak labels were generated against an
+earlier version of the taxonomy and name classes that no longer exist. Regenerating them
+would cost roughly 376k tokens against a 200k daily cap; the dev split is hand-labelled
+in the current taxonomy, costs nothing, and is disjoint from test.
 """
 
 from __future__ import annotations
@@ -32,19 +37,21 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from agent.schemas import PipelineResult
 
-WEAK = Path(__file__).resolve().parent.parent / "data" / "weak_labels.jsonl"
+import config
+
+
+def dev_rows() -> list[dict]:
+    """The 60 hand-labelled dev rows. Test is never read here."""
+    if not config.GOLDEN_JSONL.exists():
+        return []
+    rows = [json.loads(l) for l in
+            config.GOLDEN_JSONL.read_text(encoding="utf-8").splitlines() if l.strip()]
+    return [r for r in rows if r.get("split") == "dev"]
 
 
 def majority_intent() -> str:
-    if not WEAK.exists():
-        return "playback_issue"  # documented guess; rerun after data/weak_label.py
-    counts = Counter()
-    for line in WEAK.read_text(encoding="utf-8").splitlines():
-        if line.strip():
-            lbl = json.loads(line).get("weak_intent")
-            if lbl:
-                counts[lbl] += 1
-    return counts.most_common(1)[0][0] if counts else "playback_issue"
+    counts = Counter(r["intent"] for r in dev_rows() if r.get("intent"))
+    return counts.most_common(1)[0][0] if counts else "product_feedback"
 
 
 class TrivialBaseline:

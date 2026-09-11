@@ -1,0 +1,2342 @@
+{
+  "1989945": {
+    "id": "1989945",
+    "text": "hey, @SpotifyCares, please please please give us a “hide band” option. Sometimes I just really NEVER want to listen to a band, you know?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "64373",
+      "1010849",
+      "2008248",
+      "1003772",
+      "1811053"
+    ],
+    "top_similarity": 0.7561519742012024,
+    "reply": "@130775 Hi Harri! Help's here. Can you let us know your device, operating system, and app version? It'd be great if you could also send a screenshot of what you're seeing from your end. We'll see what we can suggest /MU",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 22.64,
+    "error": null
+  },
+  "166674": {
+    "id": "166674",
+    "text": "Can @115888 fix the android app so that it doesn't pause other android apps if Spotify is changing song on a completely different device?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1806092",
+      "1282998",
+      "2456326",
+      "711274",
+      "1264075"
+    ],
+    "top_similarity": 0.7272804975509644,
+    "reply": "@542651 Hi! Don't worry, help's here. Can you let us know the device you're using along with the Android &amp; Spotify versions you have installed? /MT",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "317340": {
+    "id": "317340",
+    "text": "I need to listen to hands and xback spotify wont let me why @115888 @15672",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "847155",
+      "2280536",
+      "2916629",
+      "337851",
+      "2917971"
+    ],
+    "top_similarity": 0.7571362257003784,
+    "reply": "@321343 Hi To reduce the number of Suggested Tracks you get, we recommend adding more artists into your playlists /DR",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2319900": {
+    "id": "2319900",
+    "text": "@115888. You guys have charged me twice a month for the last 3three months I'm not happy dm me to fix this",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2920742",
+      "115228",
+      "688996",
+      "1535895",
+      "1516287"
+    ],
+    "top_similarity": 0.7992785573005676,
+    "reply": "@808359 Hi there, thanks for bearing with us! We had a little hiccup earlier, but everything should be running just fine now /JS",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2931615": {
+    "id": "2931615",
+    "text": "They tagged the wrong Logic on @115888 @SpotifyCares 🤦🏼‍♂️ @112419 https://t.co/uTujGtMMbo",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "748894",
+      "1295658",
+      "1281622",
+      "203131",
+      "2520926"
+    ],
+    "top_similarity": 0.7670906782150269,
+    "reply": "@299026 Hey Michael. Is there something wrong with the song in the picture? Let us know /TF",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1978890": {
+    "id": "1978890",
+    "text": "The fact you think your upload date is more important than displaying an actual release date is a disgusting mockery of his memory @115888 https://t.co/EDIR3gLlmh",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "55237",
+      "48593",
+      "885137",
+      "2544101",
+      "2864067"
+    ],
+    "top_similarity": 0.587323784828186,
+    "reply": "@128527 Hi there! Thanks for the feedback. We'll be sure to pass it onto the right team. Give us a shout if you have other questions /DV",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1689795": {
+    "id": "1689795",
+    "text": "@SpotifyCares - I keep getting a 404 when trying to log into the web player. Are there known current issues w/ this?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1023996",
+      "1688016",
+      "1346923",
+      "106362",
+      "1788333"
+    ],
+    "top_similarity": 0.8138089179992676,
+    "reply": "@362325 Hey Jessica. This is fixed! Everything should now be running as smooth as this guy's voice: https://t.co/NXWaP3cMnY /TF",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1820795": {
+    "id": "1820795",
+    "text": "@SpotifyCares pls help! Have paid for Premium sub via iTunes but app is not working. Have tried logging out/in &amp; reinstalling to no avail :( https://t.co/OY86IILdeq",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "162239",
+      "2913907",
+      "1725340",
+      "2917895",
+      "2907369"
+    ],
+    "top_similarity": 0.7903167009353638,
+    "reply": "@153457 It seems the system was unable to process your payment. We’d recommend reaching out to iTunes for more information on the charge. Any other questions, feel free to give us a shout /TF",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "379053": {
+    "id": "379053",
+    "text": "@SpotifyCares The email associated with my account was changed and it wasn’t me! So now I can’t access my own account. Help?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2316881",
+      "401762",
+      "1911919",
+      "1098967",
+      "399537"
+    ],
+    "top_similarity": 0.9197561740875244,
+    "reply": "@671754 Hey Steve, we're sorry to hear that! We'd suggest checking out https://t.co/QHn3ok8y2n for what to do next /RH https://t.co/ldFdZRiNAt",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "1890133": {
+    "id": "1890133",
+    "text": "Hey @115888 tell me why Get Used To Her by @3291 isn't anywhere to be seen on your app. Sort it out or I'll remain upset forever.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2545850",
+      "1521671",
+      "704751",
+      "525695",
+      "1490385"
+    ],
+    "top_similarity": 0.6327040195465088,
+    "reply": "@723614 Hey! That doesn't sound good. Can you let us know what's going on and on what device? We'll do our best to help /CB",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "1012742": {
+    "id": "1012742",
+    "text": "@115888 any progress/updates on Apple Watch app? very hard to find except “working on it”",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1925283",
+      "1858209",
+      "2041921",
+      "2065393",
+      "2456294"
+    ],
+    "top_similarity": 0.8422309160232544,
+    "reply": "@573050 Hi Henrik! We're afraid we don't have any info to share on this right now. We'd suggest showing your support at https://t.co/SEK4E4gi22 /LP",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "866201": {
+    "id": "866201",
+    "text": "@115888 I keep getting a message that my download library is full and I need to delete albums. I did that, but it's not freeing space. ?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "86378",
+      "1214633",
+      "55223",
+      "2547399",
+      "2582075"
+    ],
+    "top_similarity": 0.7224537134170532,
+    "reply": "@134860 Hey there, we'd love to help! Can you let us know your device, operating system, and the version of Spotify you're running? We'll see what we can suggest /AG",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "571347": {
+    "id": "571347",
+    "text": "Waiting for the \"your top songs of 2017\" playlist @115888",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "566365",
+      "526694",
+      "577400",
+      "2832301",
+      "494245"
+    ],
+    "top_similarity": 0.893562376499176,
+    "reply": "@252778 Hey there! We don't have any info on this right now, but we'll let the right team know it's something you'd like to see /NQ",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1806156": {
+    "id": "1806156",
+    "text": "@115888 account.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2919384",
+      "1476037",
+      "2608706",
+      "2215964",
+      "2802522"
+    ],
+    "top_similarity": 0.8234916925430298,
+    "reply": "@808040 Hey Alondra, thanks for the report. We had a little hiccup earlier but everything should be running just fine now /CE",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2558823": {
+    "id": "2558823",
+    "text": "@115888 Can't find all my downloaded songs on Spotify. Any idea what's wrong? Using the latest version of Android on a Sony Xperia Z5 Premium. Help!",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1784998",
+      "2919423",
+      "2251356",
+      "781167",
+      "1692164"
+    ],
+    "top_similarity": 0.763155460357666,
+    "reply": "@536302 Hi. Sorry to hear that! You can check out the steps under “Downloads unexpectedly removed” at https://t.co/38J7tFlIBF /JU",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1271326": {
+    "id": "1271326",
+    "text": "@115888 why is @135616 part of your app now?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2913904",
+      "859656",
+      "2919270",
+      "2545850",
+      "808962"
+    ],
+    "top_similarity": 0.8326135873794556,
+    "reply": "@656011 Hey. We had a little hiccup earlier, but everything should be running as smooth as Smooth Jazz now! /JE",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1604444": {
+    "id": "1604444",
+    "text": "Hey @spotifycares, why can't we filter out Danish music from \"Browse\"? Like most people I'm not at all interested in Danish music.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1792444",
+      "479851",
+      "1985956",
+      "1941620",
+      "1658868"
+    ],
+    "top_similarity": 0.6598365306854248,
+    "reply": "@538366 Hi! We can see how that’d be useful. You can vote for a similar idea here: https://t.co/dRC9nU4EIs. Let us know if you need us again /AK",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2308693": {
+    "id": "2308693",
+    "text": "@115888 tried for months to cancel Not used it No option to cancel in app and website won’t load  £30 out of pocket I go to account settings in app but no option to cancel It’s taken me long enough to find the settings If you are  use an app, at least let people cancel on it",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2298905",
+      "2055577",
+      "1884237",
+      "38961",
+      "718673"
+    ],
+    "top_similarity": 0.6920864582061768,
+    "reply": "@667297 Hey! Can you give us more info on what's going on? We'll do our best to help you with your subscription /CB",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "1798651": {
+    "id": "1798651",
+    "text": "@115888 is there any kind of customer service phone number",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2645269",
+      "507401",
+      "64381",
+      "1198680",
+      "2280200"
+    ],
+    "top_similarity": 0.9315698146820068,
+    "reply": "@582375 Hey! We don't have phone support, but we can help via Twitter. Can you let us know how we can lend a hand? /YM",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "466075": {
+    "id": "466075",
+    "text": "can we do s/t about how when i search my saved songs, it only plays the ONE song? aka the queue is empty? sometimes i wanna start my shuffle with a song and having to scroll through all of them for one song is a lot. i mean, im not dying but it's a lot. thanks gf! @SpotifyCares",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2509527",
+      "1888573",
+      "2484435",
+      "23260",
+      "659566"
+    ],
+    "top_similarity": 0.7247896194458008,
+    "reply": "@160199 Hey there! Can you let us know your device's make and model, Android and Spotify versions? We'll see what we can suggest /AP",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2406988": {
+    "id": "2406988",
+    "text": "it’d be nice if @115888 @SpotifyCares would have a separate, redux Rap Caviar playlist for people who listen to it while driving. you implemented a Safe Car mode for your app but your Rap Caviar playlist sucks when you have to skip through videos. #DriveSafe",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "967268",
+      "1821861",
+      "203135",
+      "2641109",
+      "1225429"
+    ],
+    "top_similarity": 0.6595536470413208,
+    "reply": "@198751 Hey Jon! We'd love to hear your thoughts. Fire them over and we'll be waiting /GU",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "1081111": {
+    "id": "1081111",
+    "text": "@SpotifyCares ???",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1336478",
+      "864565",
+      "2912441",
+      "1941191",
+      "165036"
+    ],
+    "top_similarity": 0.9496925473213196,
+    "reply": "@325334 2: of when this happens, but hopefully it will update soon. Let us know if you have any other questions /LM",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2239760": {
+    "id": "2239760",
+    "text": "@115888 when will #reputation be added?? Really want to listen to it and I can't find it anywhere 😣",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1162437",
+      "2653012",
+      "2215942",
+      "2259652",
+      "2653089"
+    ],
+    "top_similarity": 0.8509212732315063,
+    "reply": "@393512 Hi! Taylor Swift's 'Reputation' isn't available to stream just yet – stay tuned! For now, check out the singles: https://t.co/3h0TnPWP0c /NH",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1997209": {
+    "id": "1997209",
+    "text": "@118266 Hari ini ngga bisa login di handphone, kenapa yah padahal email dan password benar",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "199178",
+      "932751",
+      "2118733",
+      "933337",
+      "20794"
+    ],
+    "top_similarity": 0.6948263049125671,
+    "reply": "@162937 Hey! We can help out in English via Twitter, but we also have Indonesian support via email at https://t.co/ZgU70TbP8M /HC",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "716175": {
+    "id": "716175",
+    "text": "@3493 why does my music stop when im not in the app now and then! This out rages me!",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "716689",
+      "2145990",
+      "2050085",
+      "1485479",
+      "540373"
+    ],
+    "top_similarity": 0.8308992981910706,
+    "reply": "@291536 Hey! What device, operating system, and Spotify version are you using? We'll see what we can suggest /CB",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2936265": {
+    "id": "2936265",
+    "text": "@SpotifyCares Lastfm scrobble login on IOS says incorrect credentials but they are correct. Tried reinstalling Spotify app and changing lastfm password but didn't work. Can u help me fix this plz so I can scrobble from iPhone? Works fine on desktop",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "262270",
+      "1742929",
+      "968815",
+      "361502",
+      "1814824"
+    ],
+    "top_similarity": 0.7176693677902222,
+    "reply": "@178473 Hi. Can you try reinstalling the app using the steps here: https://t.co/EqisDMwZAT? Keep us posted /LM",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1183525": {
+    "id": "1183525",
+    "text": "Wish @115888 would let me on my account in Australia like",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1222098",
+      "2190951",
+      "1801258",
+      "1865819",
+      "2166342"
+    ],
+    "top_similarity": 0.5592111349105835,
+    "reply": "@406765 Hi there! Can you tell us which country are you in? We'll take a look under the hood /JM",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2872026": {
+    "id": "2872026",
+    "text": "also i predownloaded all of my @115888 music at home before i left and none of my songs would play 😐😑",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1777411",
+      "1435277",
+      "1179895",
+      "1990721",
+      "2150443"
+    ],
+    "top_similarity": 0.7784409523010254,
+    "reply": "@534082 Hi! Sorry to hear that! See the steps under “Downloads unexpectedly removed” at https://t.co/38J7tFlIBF. They should help with this /RA",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1974284": {
+    "id": "1974284",
+    "text": "خگ ده امی سر اسپاتیفای شونه. دیونه کد. ده ویندوز آدم‌واری کار ننه. https://t.co/0z1P7JkaVE",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "956476",
+      "585121",
+      "1858006",
+      "919002",
+      "211112"
+    ],
+    "top_similarity": 0.40664583444595337,
+    "reply": "@340574 We can help out in English via Twitter, but we also have Arabic support via email at https://t.co/ZgU70TbP8M /QI",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "976846": {
+    "id": "976846",
+    "text": "@SpotifyCares Email associated with fb account is no longer active but is on file with my subscription. How do I fix?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2794494",
+      "2502224",
+      "299107",
+      "567964",
+      "1927090"
+    ],
+    "top_similarity": 0.7963864803314209,
+    "reply": "@779837 Hey Robert! Does restarting your device help at all? Let us know how it goes /TF",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2602366": {
+    "id": "2602366",
+    "text": "@SpotifyCares how come my Spotify keeps pausing/unpausing when I’m trying to listen to stuff? Version 8.4.27.895 (also skips songs randomly too)",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1220134",
+      "1742921",
+      "2739627",
+      "2621340",
+      "2794526"
+    ],
+    "top_similarity": 0.8578886985778809,
+    "reply": "@406267 Hey! Can you let us know which device and operating system you're using? Also, is this happening over WiFi or 3G/4G? /NQ",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2709286": {
+    "id": "2709286",
+    "text": "@115888 stop ruining my playlists with recommendations please &amp; thank you",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1742651",
+      "2487412",
+      "2759238",
+      "335345",
+      "2314343"
+    ],
+    "top_similarity": 0.8041895627975464,
+    "reply": "@525674 Hi! We're afraid this isn't possible right now, but you can show your support for the idea here: https://t.co/rXH5HEx9hM /AU",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "832538": {
+    "id": "832538",
+    "text": "@SpotifyCares Drain Sth's song \"Crack the Liar's Smile\" is named \"Crack the War's Smile\" incorrectly.\n Just FYI.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2161262",
+      "908410",
+      "1043324",
+      "2513131",
+      "711175"
+    ],
+    "top_similarity": 0.5937892198562622,
+    "reply": "@634692 Hey Trevor! Can you send us the Spotify URI? Just right-click the track &gt; Share &gt; URI. We'll check things out /KC",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2289779": {
+    "id": "2289779",
+    "text": "@117153 i have a charge in my debit card but my premium service isnt’ available yet, can u help me???",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2456317",
+      "1981783",
+      "1908025",
+      "1798677",
+      "1923344"
+    ],
+    "top_similarity": 0.725127100944519,
+    "reply": "@555487 We're afraid that our devs are still looking into this. We'll keep you posted once we have updates /JU",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1272618": {
+    "id": "1272618",
+    "text": "@117153 spotify premium on my phone refuses to play Ed Sheeran? It stops playing. I don't have any ed sheeran on my phone storage.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1084528",
+      "1198665",
+      "969963",
+      "774315",
+      "399248"
+    ],
+    "top_similarity": 0.8158280849456787,
+    "reply": "@375829 Hey Cathee! The cavalry's here. Could you fire over the make/model, operating system, and Spotify version you're using? /KB",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2161302": {
+    "id": "2161302",
+    "text": "@115888 how we get a song put on Spotify? Because I would love to see this girl by laza morgan in Spotify right now",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "14943",
+      "313044",
+      "223047",
+      "831877",
+      "1162347"
+    ],
+    "top_similarity": 0.7648260593414307,
+    "reply": "@119240 Hey! We’d love to have all of his stuff available, but we have some info about content here: https://t.co/0i8GpimuDa /NQ",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1966644": {
+    "id": "1966644",
+    "text": "Hey @115888 what have I ever done to you that makes you put Nickleback in my discover weekly playlist?!",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "45744",
+      "1866044",
+      "2759238",
+      "2366359",
+      "1694985"
+    ],
+    "top_similarity": 0.7565886378288269,
+    "reply": "@126140 2: tunes. Fingers crossed it'll be a better fit next week. Give us a shout for anything else 🙂 /LP",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1799077": {
+    "id": "1799077",
+    "text": "@5525 @SpotifyCares Spotify keeps freezing when playing on Chromecast. Tried deleting and reinstalling app on two iOS devices",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1527858",
+      "1021333",
+      "2513008",
+      "574254",
+      "810925"
+    ],
+    "top_similarity": 0.7637153267860413,
+    "reply": "@474386 Hey, we're here to help. What device, operating system, and Spotify version are you using? We'll see what we can suggest /RA",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2154961": {
+    "id": "2154961",
+    "text": "Il existe des cartes prépayées @127637 1 ans ? @SpotifyCares",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2218899",
+      "382960",
+      "1495683",
+      "1961483",
+      "1730309"
+    ],
+    "top_similarity": 0.6989104747772217,
+    "reply": "@648189 Hey there! We can help out here in English, but we also have French support via email at https://t.co/ZgU70TbP8M /MA",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1973014": {
+    "id": "1973014",
+    "text": "@SpotifyCares I️ have a student premium subscription and I️ tried logging into Hulu, but it says “we’re having trouble authorizing your account with Spotify”",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1634776",
+      "905308",
+      "2513136",
+      "784864",
+      "1941626"
+    ],
+    "top_similarity": 0.854363203048706,
+    "reply": "@500077 Hey Megha! Could you try logging in to your account page here: https://t.co/cnaaFIwigZ. Then press \"Learn More\" to get the ball rolling /TY",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1926348": {
+    "id": "1926348",
+    "text": "@115888 um ... 9 of 10 “new releases for you” are singles. I hate singles. New algorithm to filter those out please. Full albums &amp; eps",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "873993",
+      "2646377",
+      "2618549",
+      "1574545",
+      "2312958"
+    ],
+    "top_similarity": 0.7088278532028198,
+    "reply": "@327491 Nice idea! It's definitely something for the team to consider and we'll make sure it reaches them /DF",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "418866": {
+    "id": "418866",
+    "text": "@115888 @SpotifyCares @117168 Why do you continue to not support \"Block stalker\"? You are now bad as @123765! https://t.co/gQQeNfu7EI",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2190898",
+      "1295658",
+      "184370",
+      "203131",
+      "2862752"
+    ],
+    "top_similarity": 0.8131175637245178,
+    "reply": "@641331 Hey there! This isn't possible right now, but you can show your support for the idea on our Community: https://t.co/oGDLtirXki /KL",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1722245": {
+    "id": "1722245",
+    "text": ".@125633 @SpotifyCares @14035 WHAT IS GOING ON IN YOUR OFFICES? Please explain to me why you have not fixed my NOI problem.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2749467",
+      "1362794",
+      "1295658",
+      "1094488",
+      "872983"
+    ],
+    "top_similarity": 0.7588529586791992,
+    "reply": "@769808 Hey Nick! We'll help out. Can you let us know what's happening exactly? We'll see what we can suggest /AN",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2865469": {
+    "id": "2865469",
+    "text": ".@115888 WTF Y’ALL WHY ARE 3 OF AALIYAH’S ALBUMS GONE",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2288865",
+      "2959369",
+      "1992091",
+      "2114209",
+      "2190905"
+    ],
+    "top_similarity": 0.866520345211029,
+    "reply": "@664969 Hey! We’d love to have all of her stuff available, but we have some info about content here: https://t.co/0i8GpimuDa /NQ",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "310619": {
+    "id": "310619",
+    "text": "@SpotifyCares could we get a setting to block ads for horror films?don't mind ads for free acct but surprise scary ones can mess a girl up!🧡",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "206559",
+      "790778",
+      "316399",
+      "748891",
+      "1204554"
+    ],
+    "top_similarity": 0.7574588656425476,
+    "reply": "@164925 Hi! Sorry, we didn't mean to scare you! We'll pass your feedback on to our Ads team /RA",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2530532": {
+    "id": "2530532",
+    "text": "My @115888 is not working. Arghhhh",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2912439",
+      "2920714",
+      "104565",
+      "2919363",
+      "1661595"
+    ],
+    "top_similarity": 0.8957056999206543,
+    "reply": "@806221 Hey! Don't worry, we're on it. Our developers are looking into this, and we'll keep everyone updated /CP",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1820744": {
+    "id": "1820744",
+    "text": "@SpotifyCares what happened to the Hold to Preview option? Is it still there or am I hallucinating lol?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "911632",
+      "1718395",
+      "1531496",
+      "4997",
+      "2371455"
+    ],
+    "top_similarity": 0.7617909908294678,
+    "reply": "@336517 Hey! We have more info about this here: https://t.co/pXBCq8GlsI. Give us a shout if you have any questions /K",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1343677": {
+    "id": "1343677",
+    "text": "When can I listen to 4:44 @115888",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2175377",
+      "2653012",
+      "1815462",
+      "2065149",
+      "499277"
+    ],
+    "top_similarity": 0.6847242712974548,
+    "reply": "@637754 Hey! We can see how that’d be handy. Thanks for taking the time to reach out – your feedback's been noted 📝 /CP",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1789428": {
+    "id": "1789428",
+    "text": "@115888 excuse me? Can You fix this??? There are 57million people in South Africa. I'm sure at least 1% would like to have Spotify https://t.co/DqWW5r5mMO",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1062623",
+      "622863",
+      "2939744",
+      "2542426",
+      "1878330"
+    ],
+    "top_similarity": 0.8349624872207642,
+    "reply": "@370919 Hey there! We're launching in new countries as often as possible. Be sure to add your email at https://t.co/X8DVSX9QgM /Q",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "590163": {
+    "id": "590163",
+    "text": "Vaag? @115888 @131098 komt met ‘n aanbieding. 99 euro voor een heel jaar. Bespaar 2 maanden. Ik log in. Je komt niet in aanmerking staat er. Je kunt wel premium nemen. Terwijl ik al jaren premium heb. Vaag?? 🤨 Snel mijn wachtwoord wijzigen. Vermoedelijk spam....",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1033890",
+      "1358437",
+      "552687",
+      "1665761",
+      "492435"
+    ],
+    "top_similarity": 0.6604362726211548,
+    "reply": "@364597 Hey! We can help out in English via Twitter, but we also have Dutch support via email at https://t.co/ZgU70TbP8M /NQ",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "1902595": {
+    "id": "1902595",
+    "text": "@SpotifyCares MS Groove user here. Followed migration steps, but when activating 60 days premium trial, says its not available in my area.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2047840",
+      "330236",
+      "669987",
+      "440865",
+      "2284405"
+    ],
+    "top_similarity": 0.7874383330345154,
+    "reply": "@311471 Hey Todd, welcome to the band! We have some more information on this here: https://t.co/Peyq1ETDeT. Any other questions, let us know 🙂 /GN",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1852269": {
+    "id": "1852269",
+    "text": "@SpotifyCares wanna fix your app? That app be draining iPhones battery’s to fast",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1613869",
+      "2715676",
+      "1880451",
+      "2507530",
+      "1770703"
+    ],
+    "top_similarity": 0.7836610078811646,
+    "reply": "@495080 Hey Jacob! Could you let us know what's happening exactly? We'll see what we can suggest /PL",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2022689": {
+    "id": "2022689",
+    "text": "can @115888 please bring out a feature that lets you list to 2 playlists at once?🤔 fed up of having to make a new playlist just to merge 2 old ones...",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1897060",
+      "2960664",
+      "1782175",
+      "1615885",
+      "2035034"
+    ],
+    "top_similarity": 0.8562489748001099,
+    "reply": "@484251 Hi! We can see how that’d be useful. You can vote for the official idea at https://t.co/GEp7udRjdU. Let us know if there's anything else /MC",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2032480": {
+    "id": "2032480",
+    "text": "@SpotifyCares hi you have charged me more for my subscription when I have the student account",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1993477",
+      "1099886",
+      "2807560",
+      "1853754",
+      "173663"
+    ],
+    "top_similarity": 0.7926554083824158,
+    "reply": "@589963 Hey there! That's not cool. Does logging out &gt; restarting the device &gt; logging back in help? Keep us posted /KL",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2844619": {
+    "id": "2844619",
+    "text": "@SpotifyCares hi! My Spotify keeps pausing in the middle of the song...help please? Thank you!",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2739627",
+      "2621340",
+      "2794526",
+      "1029042",
+      "2488834"
+    ],
+    "top_similarity": 0.8482776284217834,
+    "reply": "@767574 Hey Katharine! Can you let us know the device, OS, and Spotify version you're using? We'll see what we can suggest /TX",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2289886": {
+    "id": "2289886",
+    "text": "Can y’all help? @SpotifyCares https://t.co/vH04hXFIRk",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2027646",
+      "1783029",
+      "462644",
+      "2215931",
+      "1797284"
+    ],
+    "top_similarity": 0.8980404138565063,
+    "reply": "@599617 Hey Arron, help's here! How long has this been happening? Can you try restarting the app, then logging back in? Let us know how it goes /SJ",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2029709": {
+    "id": "2029709",
+    "text": "@115888 I'm having problems with my account. Can you direct me to the right contact?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1062566",
+      "1601207",
+      "2310144",
+      "1865819",
+      "2618574"
+    ],
+    "top_similarity": 0.8892269134521484,
+    "reply": "@370896 Hi there. We’re sorry to hear that. We suggest checking out https://t.co/QHn3ok8y2n for what to do next /LM",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1171622": {
+    "id": "1171622",
+    "text": "@115888 I think your mobile app has a login bug? I downloaded again and the login or signup isn't working. ?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1302074",
+      "2917774",
+      "2153123",
+      "2746337",
+      "412004"
+    ],
+    "top_similarity": 0.7430273294448853,
+    "reply": "@424294 Hey! Don’t worry, we can help. What’s happening exactly? Can you let us know the device/OS you’re using? We'll see what we can suggest /CG",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1911439": {
+    "id": "1911439",
+    "text": "@SpotifyCares My app on android insists I'm offline when I'm not. https://t.co/ikLtz55DMK",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "901641",
+      "664257",
+      "1788405",
+      "2913891",
+      "1444701"
+    ],
+    "top_similarity": 0.8374782204627991,
+    "reply": "@334050 Hey Mike! Help's here. What device, operating system, and Spotify version are you rocking? We'll see what we can suggest /RA",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2338243": {
+    "id": "2338243",
+    "text": ".@115888 is the new @51264 and @7350 collab album going to be on Spotify???",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1720287",
+      "1803339",
+      "1338269",
+      "2215919",
+      "2673236"
+    ],
+    "top_similarity": 0.8131877779960632,
+    "reply": "@520664 Hi there! Don't worry, we're here to help. Can you let us know more on the album you're referring to? We'll have a closer look /MT",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1234878": {
+    "id": "1234878",
+    "text": "Ugh @115888 suggested track feature is so annoying.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2507504",
+      "1862905",
+      "727157",
+      "845921",
+      "1521352"
+    ],
+    "top_similarity": 0.7218772172927856,
+    "reply": "@714904 Hey there, Suggested Tracks are part of our Free service on mobile. More info here: https://t.co/Uv9kyGcsCc. Thanks for sharing your thoughts, we'll pass it on to the relevant folks /SY",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "648641": {
+    "id": "648641",
+    "text": "@115888 when tf are y'all gonna launch in india? i wanna listen to bts's playlists :/",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2219830",
+      "1159725",
+      "163745",
+      "2942716",
+      "737841"
+    ],
+    "top_similarity": 0.7233344912528992,
+    "reply": "@648412 Hey! We're launching in new countries as often as possible. Be sure to add your email at https://t.co/X8DVSX9QgM /RC",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2072767": {
+    "id": "2072767",
+    "text": "@115888 what's the point of showing me a follower count on my playlists if I can't see who they are? 🤔🤔🤔",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "552681",
+      "1980702",
+      "2820832",
+      "698868",
+      "1225429"
+    ],
+    "top_similarity": 0.8393751382827759,
+    "reply": "@248880 Hey there! It's not possible to view your playlist followers right now, but we'll make sure to pass your feedback to the right folks. If there's anything else, let us know /LP",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "794066": {
+    "id": "794066",
+    "text": "@115888 can't listen and scroll twitter at the same time without music pausing. Why",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1508816",
+      "608247",
+      "2755879",
+      "1860137",
+      "1301447"
+    ],
+    "top_similarity": 0.7576959133148193,
+    "reply": "@470215 Hey Fatima! That's not cool. Does logging out &gt; restarting the device &gt; logging back in help? Keep us posted /MX",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2292732": {
+    "id": "2292732",
+    "text": "@115888 if you'd put trout mask replica by cpt beefheart in your library that'd be great",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1798611",
+      "1099899",
+      "983072",
+      "2920765",
+      "874004"
+    ],
+    "top_similarity": 0.7589544653892517,
+    "reply": "@540431 Hey Chad! We’ll have it available to you as soon as it’s available to us. More about Spotify content here: https://t.co/0i8GpimuDa /AN",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1959562": {
+    "id": "1959562",
+    "text": "@115888 should have an option to watch the music video when listening to music",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "53682",
+      "2896767",
+      "2484415",
+      "2121347",
+      "1757048"
+    ],
+    "top_similarity": 0.7546934485435486,
+    "reply": "@128140 Hey! Can you give us more info on what's happening? Also, what device, OS, and Spotify version are you using? /CB",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "585113": {
+    "id": "585113",
+    "text": "@SpotifyCares \nHi, please could you create a new profile for this new artist with the same name as my favourite band @92784. Thank you! \n\nhttps://t.co/vZLdJPtnWN",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "564504",
+      "2827788",
+      "1792392",
+      "2080074",
+      "1085191"
+    ],
+    "top_similarity": 0.741869330406189,
+    "reply": "@252230 Hey there! We don't have any info on this right now, but we'll let the right team know it's something you'd like to see /NQ",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "280234": {
+    "id": "280234",
+    "text": "Hey @115888, how DARE you follow-up Vangelis' #Bladerunner soundtrack with 'Orinoco Flow' by less-than-replicant Enya!? #BladeRunner2049 https://t.co/PMtPuDyFdQ",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1299920",
+      "1876063",
+      "79382",
+      "2022200",
+      "1243466"
+    ],
+    "top_similarity": 0.5339686870574951,
+    "reply": "@423829 Hi, thanks for the feedback! To reduce the number of Suggested Tracks you get, try adding more artists into your playlists /GT",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2065151": {
+    "id": "2065151",
+    "text": "Why @115888 took @16444 industry off 🤔",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2574093",
+      "2552634",
+      "2042209",
+      "2211000",
+      "2917780"
+    ],
+    "top_similarity": 0.6736544370651245,
+    "reply": "@729964 Hey Yasmin! Sometimes content gets temporarily removed because of licensing changes. Hopefully we'll have it available again soon /KL",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "466058": {
+    "id": "466058",
+    "text": "@SpotifyCares if I’ve reached out about my song being released under a wrong blank duplicate artist and it’s going to be moved, will those monthly listeners/followers and statistics be moved over to the right artist page?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2018433",
+      "1488410",
+      "1855971",
+      "1422432",
+      "1245067"
+    ],
+    "top_similarity": 0.7055790424346924,
+    "reply": "@596923 Hey there, That sounds like a great idea! Suggest it in our Community at https://t.co/rtDvYZOF32 and get support from other users /TB",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "848562": {
+    "id": "848562",
+    "text": "Finns det något sätt att sluta få rekommendationer om Chris Browns nya musik, @8199? Vill inte ha det svinet i mina spellistor.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "74908",
+      "1855640",
+      "141172",
+      "2114205",
+      "141196"
+    ],
+    "top_similarity": 0.6315171718597412,
+    "reply": "@132763 Hey Dennis! We can help out in English via Twitter, but we also have Swedish support via email at https://t.co/ZgU70TbP8M /MS",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "353151": {
+    "id": "353151",
+    "text": "@SpotifyCares @115888 how do I switch my Premium account to a Family Account!?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1096220",
+      "1990574",
+      "1850983",
+      "2709269",
+      "1109427"
+    ],
+    "top_similarity": 0.8759182691574097,
+    "reply": "@378680 Hey Vicky! Just follow the steps under \"Manage your Premium for Family plan\" here: https://t.co/ZRtHLRifEG. Let us know how it goes 🙂 /VK",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2653201": {
+    "id": "2653201",
+    "text": "@SpotifyCares how do I find out who owns family plan",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1016888",
+      "190088",
+      "1782720",
+      "2033071",
+      "1771360"
+    ],
+    "top_similarity": 0.7194958925247192,
+    "reply": "@360599 Hi, help's here. Can you try using a different browser or an incognito window? Make sure to clear cache/cookies too. Keep us posted /AK",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2061461": {
+    "id": "2061461",
+    "text": "@116130 I'm calling the police - why is \"Justify My Love\" so far down on your This is: Madonna playlist?! Under \"Give It 2 Me\"?! 🤦🏼‍♀️ https://t.co/YZV7pq6YCd",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2246086",
+      "207226",
+      "2493992",
+      "1474911",
+      "2614459"
+    ],
+    "top_similarity": 0.5751811265945435,
+    "reply": "@654616 Hey Kadi! Sometimes content gets temporarily removed because of licensing changes. Hopefully we'll have it available again soon /CO",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "444535": {
+    "id": "444535",
+    "text": "Good one @115888, email to let me know I can get 3 months for $15, so I instantly open it up, all excited just to be met with a screen saying I don't qualify, even though you sent me the email\nWay to bring my hopes up, then smash them face first into the ground 😭 @SpotifyCares?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2309928",
+      "1098722",
+      "2549174",
+      "637662",
+      "1725898"
+    ],
+    "top_similarity": 0.7341793179512024,
+    "reply": "@669944 Hey there! Don't worry, we're on it. Our developers are looking into this, and we'll keep everyone updated /GU",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "2131382": {
+    "id": "2131382",
+    "text": "@SpotifyCares Can I beta test Spotify Hi-Fi? Current family subscriber here. I’m trying out Tidal lossless and I’m seriously impressed.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1117644",
+      "2809547",
+      "2312074",
+      "2293008",
+      "2716529"
+    ],
+    "top_similarity": 0.8253520131111145,
+    "reply": "@383713 Hi there! We're not currently looking for testers, but you could check this out: https://t.co/ieJlcMnGDe. Hope this helps /MU",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "420690": {
+    "id": "420690",
+    "text": "@115888 needs to stop playing that fucking death day ad when i’m tryna sleep",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "281746",
+      "1786965",
+      "1912308",
+      "1904059",
+      "1049480"
+    ],
+    "top_similarity": 0.7653498649597168,
+    "reply": "@183124 Hey Lorena, we understand how you feel about it. Don't worry, we'll pass the feedback on to the right people /AY",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "372630": {
+    "id": "372630",
+    "text": "@SpotifyCares please answer my message I sent to y’all",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1315618",
+      "2580701",
+      "617753",
+      "2295221",
+      "2804490"
+    ],
+    "top_similarity": 0.8471078276634216,
+    "reply": "@425743 No worries! We've just followed you. Just to check, is everything up and running now? /MU",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2525596": {
+    "id": "2525596",
+    "text": "@115888 @SpotifyCares - I am seeing my playback interrupted and time to time I see my app connected to \"spotiamb 0.2.1\"... Any idea how to purge this hack?",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2410559",
+      "1296388",
+      "2627027",
+      "2293848",
+      "2595630"
+    ],
+    "top_similarity": 0.728901743888855,
+    "reply": "@693059 Hi Gordon! We’re sorry to hear that. Check out https://t.co/QHn3ok8y2n for what to do next /AU",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "2917975": {
+    "id": "2917975",
+    "text": "@117153 can’t search anything but tracks are still playing fine? https://t.co/X0Ey3KpYwx",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2916670",
+      "2121280",
+      "2920751",
+      "48128",
+      "2916626"
+    ],
+    "top_similarity": 0.7280747294425964,
+    "reply": "@807314 Hey John. We've made a few tweaks backstage, so this should now be fixed up. Let us know if not! /CE",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "627397": {
+    "id": "627397",
+    "text": "Paying for Spotify family and have been hacked by users!!My family has been kicked off and other users taking over @SpotifyCares @115888 https://t.co/yTnm69eEkH",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1626598",
+      "1917659",
+      "2364820",
+      "1767691",
+      "1913939"
+    ],
+    "top_similarity": 0.8002766370773315,
+    "reply": "@208657 Hey there, we’re sorry to hear that. Check out https://t.co/QHn3ok8y2n for what to do next /JN",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1015897": {
+    "id": "1015897",
+    "text": "Hey @115888 could you please change the picture to Louis Tomlinson and add his new song ‘just like you’ to the playlist? 😊 https://t.co/4cGa8u8MPP",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "711771",
+      "337089",
+      "649948",
+      "1033857",
+      "2363287"
+    ],
+    "top_similarity": 0.5911380648612976,
+    "reply": "@153619 Hi there! Thanks for the feedback. We'll be sure to let the right team know it's something you'd like to see 🙂 /JI",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "1639591": {
+    "id": "1639591",
+    "text": "@117153 \nj'ai payer mon abonnement et je suis toujours a la version gratuite, j'ai suivie toute les recommendation mais fonctionne pa",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "720714",
+      "300700",
+      "1495683",
+      "959417",
+      "727691"
+    ],
+    "top_similarity": 0.7012917399406433,
+    "reply": "@292494 Hey Marianne! We can help out here in English, but we also have French support via email at https://t.co/ZgU70TbP8M /MA",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "468968": {
+    "id": "468968",
+    "text": "I love how @115888 keeps giving me reasons NOT to give money to them. WHY IN THE WORLD IS SPOTIFY RUNNING ON MY PHONE WHEN I'M PLAYING IT ON MY DESKTOP? And there seems to be no way to disable this. \n\nBack to youtube and deezer I go then",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1764690",
+      "2458495",
+      "2507518",
+      "448852",
+      "2513067"
+    ],
+    "top_similarity": 0.722867488861084,
+    "reply": "@530826 Hey there, we'd love to help! Can you try logging out of your account, then restart both devices? Any better? /AG",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "2539075": {
+    "id": "2539075",
+    "text": "Anyone else think that @115888 / @SpotifyCares really needs a pin to top feature? Got about 10 regular playlists on the go and so annoying having to always put them to top. Plleeeeeeassseeeeee guys make it happen. https://t.co/Byx6HH7fRp",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1667363",
+      "1789520",
+      "1904128",
+      "1225429",
+      "2110131"
+    ],
+    "top_similarity": 0.7381154298782349,
+    "reply": "@507854 2: In the meantime, check out the info at https://t.co/5pR9eg0nYQ to know how you can sort your playlists /RS",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.02,
+    "error": null
+  },
+  "2552717": {
+    "id": "2552717",
+    "text": "I love how @115888 releases an app update but not to optimize it for iphone X",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2580759",
+      "2709278",
+      "1607964",
+      "2246096",
+      "2190767"
+    ],
+    "top_similarity": 0.8742085695266724,
+    "reply": "@731474 Hi there! Don't worry, we’re working on it as we speak. Stay tuned 🙂 /NH",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "44431": {
+    "id": "44431",
+    "text": "@SpotifyCares I need help with deactivating my account.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2358991",
+      "2080862",
+      "893403",
+      "895226",
+      "726217"
+    ],
+    "top_similarity": 0.8756908178329468,
+    "reply": "@681293 Hey, help's here! You can reset your password at https://t.co/dYhFq1waZW. Let us know if you need anything 🙂 /JQ",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1505018": {
+    "id": "1505018",
+    "text": "@115888 I’m trying to create my account on the website but it seems to be taking a longggg time 😅",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2618574",
+      "1865819",
+      "2788013",
+      "376116",
+      "997198"
+    ],
+    "top_similarity": 0.7334309220314026,
+    "reply": "@740011 Hi there! Can you let us know what's happening exactly? Are you getting any specific error messages when trying to sign in/sign up? Also, are you doing this through the app or the browser? /LM",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "100138": {
+    "id": "100138",
+    "text": "@SpotifyCares My playlists don't sync between the Desktop app (on Mac), my phone (Android), and the web player. They're all different. Please help.",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "1933742",
+      "2749449",
+      "257841",
+      "102210",
+      "1691128"
+    ],
+    "top_similarity": 0.7877151966094971,
+    "reply": "@575416 Hey Steve! The cavalry's here. Could you send us a screenshot of the error message you're getting? We'll see what we can suggest /KB",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  },
+  "1710968": {
+    "id": "1710968",
+    "text": "@115888 @SpotifyCares I want The Warm Up, Friday Night Lights and Truly Yours on spotify. All are J Cole's mixtapes @52326 #dreamville",
+    "intent": "product_feedback",
+    "intent_confidence": null,
+    "runner_up": null,
+    "retrieved_ids": [
+      "2622914",
+      "1803339",
+      "2040461",
+      "1085191",
+      "203131"
+    ],
+    "top_similarity": 0.7465113997459412,
+    "reply": "@651826 Hey! Sometimes content gets temporarily removed because of licensing changes. Hopefully we'll have it available again soon! /DF",
+    "evidence_ids": [
+      0
+    ],
+    "should_escalate": null,
+    "escalation_reason": null,
+    "escalation_source": "B3",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_s": 0.01,
+    "error": null
+  }
+}
