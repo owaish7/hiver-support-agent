@@ -14,3 +14,11 @@ data/index.npz
 # Banking77 (PolyAI, CC-BY-4.0). Downloaded on demand by
 # eval/external_check.py -- cited, not redistributed.
 data/banking77_*.csv
+
+# Intermediates, rebuilt by data/build_threads.py from twcs.csv in ~3 minutes.
+# Only data/brand_sample.csv is committed: it is the dataset of record every number in
+# the report comes from, and it is what makes the 15-minute reproduction possible
+# without a 500MB Kaggle download. Committing the 38MB of intermediates as well would
+# work against exactly that goal.
+data/pairs_*.csv
+data/sample.csv

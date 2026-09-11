@@ -1,5 +1,13 @@
 # AI support agent for a single brand, and the evidence it works
 
+> **Data attribution.** `data/brand_sample.csv` is a 20,000-row derived subsample of
+> [Customer Support on Twitter](https://www.kaggle.com/datasets/thoughtvector/customer-support-on-twitter)
+> (thoughtvector, Kaggle), licensed **CC-BY-NC-SA-4.0** and redistributed here under the
+> same licence for non-commercial evaluation. Banking77 is PolyAI's, CC-BY-4.0
+> ([Casanueva et al. 2020](https://arxiv.org/abs/2003.04807)), downloaded on demand
+> rather than redistributed.
+
+
 Real customer-support conversations from Twitter ([Kaggle: thoughtvector/customer-support-on-twitter](https://www.kaggle.com/datasets/thoughtvector/customer-support-on-twitter)).
 One brand. For every inbound message the system classifies the intent, drafts a reply
 grounded in how that brand has actually resolved similar issues, and decides whether a
