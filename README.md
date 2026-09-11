@@ -34,6 +34,27 @@ Intent accuracy carries a 95% Wilson interval. At n=140 that is roughly ±6 poin
 **a gap smaller than the interval is not a result**, and the report says so rather than
 claiming it.
 
+### External check — the one number already measured
+
+Every other figure here is graded against labels I wrote myself. This one is not:
+
+| approach | accuracy | macro-F1 | n | classes |
+|---|---|---|---|---|
+| TF-IDF + logistic regression on **Banking77** | **87% ±1** | 0.874 | 3,080 | 77 |
+| LLM zero-shot, same prompting as `agent/classify.py` | – | – | 231 | 77 |
+| fine-tuned ModernBERT (published reference) | 94% | 0.940 | 3,080 | 77 |
+
+[Banking77](https://github.com/PolyAI-LDN/task-specific-datasets) is 3,080 queries across
+77 intents labelled by PolyAI. It is **not** used to define this project's taxonomy — 77
+banking intents have nothing to do with a music brand. It is used to show the method
+survives contact with ground truth I did not write, which is the strongest objection
+anyone can raise against a single-annotator project. Runs free and offline:
+`python eval/external_check.py --tfidf`.
+
+Its most-confused pairs (`why_verify_identity → verify_my_identity`, `card_arrival →
+card_delivery_estimate`) are outside evidence for the argument this project makes about
+its own categories: **boundaries are the hard part, not the class list.**
+
 Two numbers bound everything else and both appear before the headline in the report:
 
 - **Intra‑annotator kappa** — agreement between the labeller and themselves, blind, a day

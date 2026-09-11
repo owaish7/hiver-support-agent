@@ -45,7 +45,9 @@ something the brand itself does not do. Good means:
 - **No vector database.** At 20k rows retrieval is one matrix multiply.
 - **No fine-tuning.** B2 (TF-IDF + logistic regression) already answers "is the LLM
   needed"; a fine-tuned encoder would cost a day to make the same point.
-- **No Banking77.** 77 intents against a 200-row answer key is 2.6 examples per class.
+- **No Banking77 *taxonomy*.** 77 retail-banking intents against a 200-row answer key is
+  2.6 examples per class, and the domain is wrong. It is used instead as an external check
+  on the method (§4b), which is a different thing and the more useful one.
 - **No sentiment-based escalation.** Angry customers with ordinary problems are ordinary
   problems; "escalate if annoyed" is a queue, not a product.
 - **No UI, no webhook service.** Neither is evidence.
@@ -118,6 +120,46 @@ At n=140 the 95% interval is roughly ±6 points. **Any gap smaller than that is 
 result**, and is not described as one below.
 
 Per-intent breakdown, confusion matrix and hard-subset accuracy: `[TBD]`.
+
+---
+
+## 4b. External check: does this work against labels I did not write?
+
+Every number in §4 is measured against labels I wrote, using prompts I also wrote. A fair
+reviewer can ask how much of the accuracy is the classifier being good and how much is the
+answer key being shaped like the classifier. This section answers that without depending
+on my answer key at all.
+
+Banking77 ([PolyAI](https://github.com/PolyAI-LDN/task-specific-datasets), CC-BY-4.0;
+Casanueva et al. 2020, [arXiv:2003.04807](https://arxiv.org/abs/2003.04807)): 3,080 test
+queries, 77 intents, labelled by someone else, with published reference numbers.
+
+| approach | accuracy | macro-F1 | n | classes |
+|---|---|---|---|---|
+| TF-IDF + logistic regression | **87% ±1** | 0.874 | 3,080 | 77 |
+| LLM zero-shot, same prompting approach as `agent/classify.py` | `[TBD]` | `[TBD]` | 231 | 77 |
+| fine-tuned ModernBERT (published) | 94% | 0.940 | 3,080 | 77 |
+
+The LLM row is sampled 3 per intent so all 77 classes appear; the test split is already
+balanced at 40 per intent, so stratifying preserves its distribution rather than distorting
+it. Predictions outside the taxonomy are counted wrong, not dropped.
+
+**What this does not show**, and the report would be dishonest without saying so:
+
+- Banking77 queries are clean, short and well-formed. Tweets are typo-ridden, sarcastic,
+  emoji-laden and often barely parseable. This tests the **method**, not robustness to
+  noise. A strong score here beside a weak score on tweets would itself be the finding.
+- The published row is a fine-tuned encoder that saw 10,003 labelled training examples.
+  The LLM row is zero-shot. A reference point, not a competition.
+- Retail banking, not music streaming. Nothing here transfers to the Spotify taxonomy.
+
+**One finding does transfer.** The pairs Banking77 confuses most are
+`why_verify_identity → verify_my_identity`, `unable_to_verify_identity →
+verify_my_identity`, `card_arrival → card_delivery_estimate` and `top_up_reverted →
+top_up_failed`. Those are near-synonymous intents inside a professionally constructed
+benchmark. That is independent evidence for the claim §3 makes about this project's own
+taxonomy: the **boundaries** are where the difficulty lives, and the human ceiling on
+fine-grained intent work is well below 100%.
 
 ---
 
@@ -199,6 +241,9 @@ Mandatory section, and the one I would read first if I were reviewing this.
    ends and the model's came from the same head, so they are correlated in a way a second
    annotator's would not be. My own blind self-agreement was κ=`[TBD]` — that is the
    measurement ceiling, and accuracy at or above it is unverifiable with this answer key.
+   §4b is a partial counterweight: the same method scores 87% ±1 on Banking77, where the
+   labels are PolyAI's rather than mine. Partial, not a fix — different domain, cleaner
+   text, and it says nothing about whether *my* eight categories are the right eight.
 
 3. **"Grounded" is graded against replies that are frequently "DM us."** `[TBD]`% of this
    brand's replies are non-substantive. A high groundedness score therefore partly

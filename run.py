@@ -35,12 +35,15 @@ STAGES: dict[str, list[list[str]]] = {
     "eval": [
         ["eval/run_eval.py", "--split", "test"],
         ["eval/judge.py"],
+        ["eval/external_check.py", "--llm"],
     ],
     "report": [
         ["eval/run_eval.py", "--report", "--split", "test"],
+        ["eval/external_check.py", "--report"],
     ],
     "check": [
         ["tests/test_offline.py"],
+        ["eval/external_check.py", "--tfidf"],
         ["eval/stats.py", "--check"],
         ["eval/metrics.py", "--check"],
         ["taxonomy/escalation.py", "--validate", "golden/golden.jsonl"],

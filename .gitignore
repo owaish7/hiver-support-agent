@@ -10,3 +10,7 @@ data/raw/
 
 # Embedding index is rebuilt by data/build_index.py in ~60s.
 data/index.npz
+
+# Banking77 (PolyAI, CC-BY-4.0). Downloaded on demand by
+# eval/external_check.py -- cited, not redistributed.
+data/banking77_*.csv

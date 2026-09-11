@@ -17,10 +17,46 @@ Including them would pad the test set with easy near-duplicates and make accurac
 better than it is. Cost: no multi-turn behaviour is measured at all, which is stated in
 the report as a limitation rather than a feature.
 
-**3. Banking77 was considered and rejected.**
-77 intents about retail banking, against a 200-row answer key, is 2.6 examples per class.
-Any per-class number computed on that is noise. Wrong domain and wrong granularity; the
-optional dataset was not worth the coupling.
+**3. Banking77 was rejected as a taxonomy and adopted as an external check.**
+Two different uses, and only the first is a bad idea.
+
+*Rejected:* using its 77 retail-banking intents as this project's category list. Wrong
+domain, and 77 classes against a 200-row answer key is 2.6 examples per class, which
+measures nothing.
+
+*Adopted:* running the same classification method against it to get a number that does not
+depend on my own answer key. This is the direct answer to the strongest objection available
+against this project — that one person wrote both the labels and the prompts, so they are
+correlated. Banking77's 3,080 test queries were labelled by PolyAI on a public benchmark
+with published reference numbers.
+
+Measured so far, with no API calls: TF-IDF + logistic regression trained on the 10,003-row
+train split scores **87% ±1 accuracy, 0.874 macro-F1** on all 3,080 test rows, against a
+published fine-tuned ModernBERT reference of 94%. LLM zero-shot row: `[TBD]`.
+
+Stated limits, in the report rather than buried: Banking77 queries are clean and
+well-formed while tweets are not, so this tests the method and not robustness to noise;
+the published row is a fine-tuned encoder that saw 10,003 labelled examples while the LLM
+row is zero-shot, so it is a reference point and not a competition; and it is a different
+domain entirely.
+
+**3b. The external check confirmed the taxonomy argument independently.**
+Banking77's most-confused pairs are `why_verify_identity → verify_my_identity`,
+`unable_to_verify_identity → verify_my_identity`, `card_arrival →
+card_delivery_estimate`, `top_up_reverted → top_up_failed`. These are near-synonymous
+intents in a professionally built benchmark. It is outside evidence for the claim this
+project makes about its own taxonomy: **the boundaries are the hard part, not the class
+list**, and a human ceiling on fine-grained intent work is well below 100%.
+
+**3c. Banking77 is downloaded on demand, not committed.**
+PolyAI's data under CC-BY-4.0 (Casanueva et al. 2020, arXiv:2003.04807). Cited, not
+redistributed. The fetch takes about two seconds and the results cache means
+`--report` still works offline.
+
+**3d. An off-taxonomy prediction counts as wrong, not as an error.**
+When the model answers with a label that is not in the list, that is a wrong answer.
+Dropping those rows as "errors" would quietly remove the model's worst failures from the
+accuracy figure.
 
 **4. Eight intents, not twenty.**
 A class with three examples has a standard error near 30 points, so "the model is bad at

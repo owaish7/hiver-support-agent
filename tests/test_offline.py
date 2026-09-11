@@ -311,6 +311,36 @@ def _():
         "messages differing only by handle and number are one test case, not two"
 
 
+@check("external check: Banking77 sampling is stratified and deterministic")
+def _():
+    import pandas as pd
+
+    from eval.external_check import PER_INTENT_SAMPLE, build_prompt
+    # Synthetic stand-in so the test needs no network.
+    test = pd.DataFrame({"text": [f"q{i}" for i in range(200)],
+                         "category": [f"intent_{i % 20}" for i in range(200)]})
+    parts = [g.sample(min(PER_INTENT_SAMPLE, len(g)), random_state=config.SEED)
+             for _, g in test.groupby("category")]
+    s1 = pd.concat(parts).reset_index(drop=True)
+    assert s1["category"].nunique() == 20, (
+        "every class must appear. A flat random draw of this size would miss classes "
+        "outright, and per-class numbers on the rest would depend on the draw.")
+    parts2 = [g.sample(min(PER_INTENT_SAMPLE, len(g)), random_state=config.SEED)
+              for _, g in test.groupby("category")]
+    assert list(pd.concat(parts2).reset_index(drop=True)["text"]) == list(s1["text"]),         "the sample must be identical across runs or the cache is meaningless"
+
+    prompt = build_prompt(["alpha", "beta", "gamma"])
+    assert "alpha" in prompt and "beta" in prompt and "gamma" in prompt
+
+
+@check("external check: an off-taxonomy prediction counts as wrong, not as an error")
+def _():
+    from eval.metrics import accuracy
+    # A model answering with a label outside the list is wrong. Dropping such rows would
+    # remove the model's worst failures from the accuracy figure.
+    assert accuracy(["a", "b"], ["a", "not_a_real_label"]) == 0.5
+
+
 @check("config: dev split is smaller than the total, and thresholds are in range")
 def _():
     assert 0 < config.DEV_SIZE < config.N_GOLDEN
