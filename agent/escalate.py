@@ -59,7 +59,7 @@ def decide(text: str, *, confidence: float | None, top_similarity: float | None,
     if ask_llm:
         try:
             res = complete(SYSTEM, f"Message:\n{text}", EscalationDecision,
-                           provider="gemini", model=config.GEN_MODEL)
+                           provider=config.GEN_PROVIDER, model=config.GEN_MODEL)
             llm_disagreed = res.parsed.should_escalate != verdict.should_escalate
         except LLMError:
             pass  # the deterministic rules stand alone; the model is a second opinion

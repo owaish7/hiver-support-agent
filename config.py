@@ -61,8 +61,32 @@ SIGMA = 0.45  # best retrieval cosine below this -> escalate(no_precedent)
 
 # ---------------------------------------------------------------- models
 
-GEN_MODEL = os.getenv("GEN_MODEL", "gemini-2.5-flash")
-JUDGE_MODEL = os.getenv("JUDGE_MODEL", "llama-3.3-70b-versatile")
+# The generator and the judge are DIFFERENT MODEL FAMILIES on purpose. Models score
+# their own family's output more generously (self-preference bias), so self-grading would
+# inflate the headline reply-quality number by an amount nobody can measure. gpt-oss and
+# Qwen have separate training lineages, which is what the argument actually rests on --
+# not that they run on different hosts.
+#
+# Both are on Groq rather than Gemini for a measured reason: the Gemini free tier turned
+# out to allow 20 requests PER DAY for gemini-2.5-flash, and this eval needs roughly a
+# thousand. Groq's free tier allows 1,000 per day per model and answers in ~0.5s rather
+# than ~2.4s. The Gemini path in llm.py still works and is one line away if a paid key
+# ever appears; it is simply unusable at 20/day.
+GEN_PROVIDER = os.getenv("GEN_PROVIDER", "groq")
+GEN_MODEL = os.getenv("GEN_MODEL", "openai/gpt-oss-20b")
+
+JUDGE_PROVIDER = os.getenv("JUDGE_PROVIDER", "groq")
+JUDGE_MODEL = os.getenv("JUDGE_MODEL", "qwen/qwen3.8-27b")
+
+# Free-tier budget, measured not guessed: 1,000 requests/day per model.
+#   weak labels    400
+#   dev tuning     120   (60 items x classify+draft)
+#   test run       280   (140 items x classify+draft)
+#   external check 154   (2 per Banking77 intent)
+#                 ----
+#                  954   generator calls, under the cap
+# The judge is a different model and so has its own 1,000.
+WEAK_LABEL_N = 400
 
 # ---------------------------------------------------------------- golden set
 

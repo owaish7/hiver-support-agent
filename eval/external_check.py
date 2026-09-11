@@ -37,7 +37,7 @@ Two rows are produced:
 Usage:
     python eval/external_check.py --tfidf          # free, no key, ~20 seconds
     python eval/external_check.py --llm --limit 20 # smoke test
-    python eval/external_check.py --llm            # 231 calls, 3 per intent
+    python eval/external_check.py --llm            # 154 calls, 2 per intent
     python eval/external_check.py --report         # offline, from cache
 """
 
@@ -76,8 +76,10 @@ CACHE = RESULTS / "banking77.json"
 # Quoted as a reference point, not as a target: that model saw 10,003 labelled training
 # examples and this run sees none.
 PUBLISHED_REFERENCE = 0.94
-PER_INTENT_SAMPLE = 3   # 3 x 77 = 231 calls. The test split is balanced 40/intent, so
-                        # stratifying preserves its distribution rather than distorting it.
+# 2 x 77 = 154 calls. The test split is balanced at 40 per intent, so stratifying
+# preserves its distribution rather than distorting it. Two rather than three purely to
+# fit the measured free-tier budget in config.py.
+PER_INTENT_SAMPLE = 2
 
 
 def load_split(split: str) -> pd.DataFrame:
@@ -128,7 +130,7 @@ def run_llm(test: pd.DataFrame, limit: int | None, force: bool) -> dict:
         reasoning: str = Field(description="One short sentence: what is being asked for.")
         intent: str = Field(description="Exactly one intent name from the list.")
 
-    # Stratified: every one of the 77 intents gets represented. A random 231 would miss
+    # Stratified: every one of the 77 intents gets represented. A random 154 would miss
     # roughly a third of the classes outright, and per-class numbers on the rest would be
     # computed from whatever happened to be drawn.
     # Plain loop rather than groupby().apply(): the apply form needs an `include_groups`
@@ -160,7 +162,7 @@ def run_llm(test: pd.DataFrame, limit: int | None, force: bool) -> dict:
     for i, row in enumerate(todo, 1):
         try:
             res = complete(system, f"Query:\n{row.text}", BankingIntent,
-                           provider="gemini", model=config.GEN_MODEL)
+                           provider=config.GEN_PROVIDER, model=config.GEN_MODEL)
             pred = res.parsed.intent.strip()
             if pred not in valid:
                 # A label outside the taxonomy is a wrong answer, not a crash. Counting

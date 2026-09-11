@@ -6,9 +6,10 @@ eval/agreement.py exists to fix. This file only produces the readings.
 
 Three choices to defend:
 
-  * A DIFFERENT MODEL FAMILY from the generator. Gemini writes, Llama grades. Models
+  * A DIFFERENT MODEL FAMILY from the generator: gpt-oss writes, Qwen grades. Models
     score their own family's output more generously, so self-grading would inflate the
-    headline by an amount nobody can measure.
+    headline by an amount nobody can measure. What matters is the separate training
+    lineage, not that they run on different hosts -- both happen to be served by Groq.
 
   * BINARY DIMENSIONS, not a 1-5 score. Nobody can say what separates a 3 from a 4, so
     averaging 1-5 ratings produces a number that cannot be acted on and cannot be
@@ -76,7 +77,7 @@ def judge_one(customer: str, reply: str, evidence_ids: list[str]) -> JudgeVerdic
             f"Draft reply:\n{reply}\n\n"
             f"Past cases the drafter was shown:\n{format_evidence(evidence)}")
     return complete(SYSTEM, user, JudgeVerdict,
-                    provider="groq", model=config.JUDGE_MODEL).parsed
+                    provider=config.JUDGE_PROVIDER, model=config.JUDGE_MODEL).parsed
 
 
 def main() -> None:

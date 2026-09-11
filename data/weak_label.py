@@ -41,7 +41,7 @@ OUT = Path(__file__).resolve().parent / "weak_labels.jsonl"
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--n", type=int, default=2000)
+    ap.add_argument("--n", type=int, default=config.WEAK_LABEL_N)
     ap.add_argument("--out", type=Path, default=OUT)
     args = ap.parse_args()
 

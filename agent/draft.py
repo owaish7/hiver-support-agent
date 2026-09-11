@@ -53,7 +53,7 @@ def draft(text: str, evidence: list[Evidence]) -> LLMResult:
     user = (f"Customer message:\n{text}\n\n"
             f"Past cases from this brand:\n{format_evidence(evidence)}")
     return complete(SYSTEM, user, DraftedReply,
-                    provider="gemini", model=config.GEN_MODEL)
+                    provider=config.GEN_PROVIDER, model=config.GEN_MODEL)
 
 
 if __name__ == "__main__":

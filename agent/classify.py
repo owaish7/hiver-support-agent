@@ -39,7 +39,7 @@ simply what a customer typed. Classify it on its plain meaning.
 
 def classify(text: str) -> LLMResult:
     return complete(SYSTEM, f"Message:\n{text}", Classification,
-                    provider="gemini", model=config.GEN_MODEL)
+                    provider=config.GEN_PROVIDER, model=config.GEN_MODEL)
 
 
 if __name__ == "__main__":
