@@ -80,6 +80,19 @@ def extract_pairs(csv_path: Path, brands: list[str]) -> dict[str, pd.DataFrame]:
             f"https://www.kaggle.com/datasets/thoughtvector/customer-support-on-twitter\n"
             f"  and unzip twcs.csv into data/\n")
 
+    # The Kaggle page ships two files with identical columns: sample.csv (93 rows, a
+    # preview) and twcs.csv (~2.8M rows, the real thing). Pointed at the preview this
+    # script runs cleanly and reports "0 pairs", which reads as "this brand has no data"
+    # rather than "wrong file" -- a confusing way to lose an hour. Fail loudly instead.
+    size_mb = csv_path.stat().st_size / 1e6
+    if size_mb < 50:
+        raise SystemExit(
+            f"\n  {csv_path.name} is only {size_mb:.2f} MB.\n"
+            f"  That is almost certainly sample.csv, the 93-row preview on the Kaggle\n"
+            f"  page. It has exactly the same columns as the real file, so nothing here\n"
+            f"  would complain -- you would just get zero pairs.\n"
+            f"  You want twcs.csv (~500 MB) from that same page, saved as data/twcs.csv\n")
+
     brandset = {b.lower() for b in brands}
 
     # ---- pass 1: every reply written by a candidate brand -------------------
