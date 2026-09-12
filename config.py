@@ -51,7 +51,11 @@ PUNT_PATTERN = (
 # ---------------------------------------------------------------- retrieval
 
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"  # local, CPU, no API key
-TOP_K = 5
+TOP_K = 4
+# Each evidence pair is truncated before it reaches the prompt. Whole tweets are mostly
+# greeting and sign-off ("Hey there! ... /KM"); the instruction is in the middle. Cutting
+# them costs little signal and is measured, not assumed -- see the token budget below.
+EVIDENCE_CHARS = 220
 
 # ---------------------------------------------------------------- thresholds
 # BOTH tuned on the dev split ONLY (golden/dev). The test split is touched once.

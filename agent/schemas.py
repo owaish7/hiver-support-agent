@@ -27,8 +27,10 @@ from taxonomy.intents import Intent
 class Classification(BaseModel):
     """Step 1: what does this customer want?"""
     reasoning: str = Field(
-        description="One sentence: what the customer is asking for, and which boundary "
-                    "rule decided it if two categories were close.")
+        description="At most 15 words: what the customer wants, and the boundary rule "
+                    "if two categories were close. The verdict follows the reasoning "
+                    "rather than the other way round, but it does not need an essay -- "
+                    "output tokens are the binding cost on a free tier.")
     intent: Intent
     runner_up: Intent | None = Field(
         default=None,
@@ -43,8 +45,8 @@ class Classification(BaseModel):
 class DraftedReply(BaseModel):
     """Step 3: the reply, plus which retrieved evidence it leaned on."""
     reasoning: str = Field(
-        description="One sentence: which retrieved example you are following and why "
-                    "it applies here.")
+        description="At most 15 words: which retrieved example you are following and "
+                    "why it applies.")
     evidence_ids: list[int] = Field(
         default_factory=list,
         description="Indices of the retrieved examples actually used. Empty means the "
