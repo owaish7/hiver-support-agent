@@ -23,12 +23,12 @@ uncalibrated instrument.
 
 ### What "good" specifically means
 
-Not resolution rate. 41% of this brand's real replies move the customer to a private
-channel, so optimising "resolved in public" would optimise for something the brand does
-not do. Good means: the intent is right including on rare intents (hence macro-F1); nothing
-needing a human is auto-handled (escalation **recall**); that safety is not bought by
-escalating everything (hence **auto-handle rate** printed beside it); and drafted replies
-say only what this brand has actually said.
+Not resolution rate — 41% of this brand's real replies move the customer to a private
+channel, so optimising "resolved in public" optimises for something the brand does not do.
+Good means: the intent is right including on rare intents (macro-F1); nothing needing a
+human is auto-handled (escalation **recall**); that safety is not bought by escalating
+everything (**auto-handle rate**, printed beside it); and replies say only what this brand
+has actually said.
 
 ### What I chose not to build
 
@@ -58,13 +58,11 @@ retrieval, the judge and the headline all still look healthy.
 Apple has 2.9× the volume and the lowest substantive rate. **59% is a hard ceiling on
 grounded reply quality** and is quoted again in §8.
 
-This table changed once during the project, which is the reason it exists. The first
-version of the punt detector was a substring list and it missed phrasings like *"let's hop
-into DM"* and *"follow/DM your confirmation number"* — **unevenly**: 6.8% of Spotify's
-"substantive" replies were really punts against 26.5% of Apple's. Apple was inflated by 15
-points and sat in second place. Sensitivity check: the ranking holds for word thresholds
-of 12 and above; at 8 words Delta overtakes Spotify, so the choice is **not**
-threshold-invariant and this report does not claim it is.
+This table changed once during the project: the first punt detector missed phrasings like
+*"let's hop into DM"* **unevenly** — 6.8% of Spotify's "substantive" replies were really
+punts against 26.5% of Apple's, inflating Apple by 15 points into second place
+(`DECISIONS.md` #1). Sensitivity: the ranking holds from a 12-word threshold upward; at 8
+words Delta overtakes, so the choice is **not** threshold-invariant.
 
 ---
 
@@ -134,26 +132,14 @@ class by construction. Their purpose is the reply column, judged in §5.
 
 ### Per-intent (system)
 
-| intent | precision | recall | F1 | n |
-|---|---|---|---|---|
-| account_security | 1.00 | 1.00 | 1.00 | 4 |
-| content_unavailable | 0.89 | 0.80 | 0.84 | 10 |
-| product_feedback | 0.95 | 0.73 | 0.83 | 26 |
-| playback_issue | 0.70 | 1.00 | 0.82 | 7 |
-| billing_charge | 1.00 | 0.67 | 0.80 | 6 |
-| plan_or_family | 0.80 | 0.80 | 0.80 | 5 |
-| other | 0.75 | 1.00 | 0.86 | 3 |
-| dm_followup | 1.00 | 0.50 | 0.67 | 2 |
-| account_access | 0.50 | 0.80 | 0.62 | 5 |
-| app_bug | 0.64 | 0.58 | 0.61 | 12 |
-| how_to | 0.50 | 0.70 | 0.58 | 10 |
+Best: `account_security` 1.00/1.00 (n=4 — too few to claim much), `content_unavailable`
+F1 0.84, `product_feedback` 0.83. Worst: `how_to` 0.58, `app_bug` 0.61, `account_access`
+0.62. Full table and confusion matrix: `python run.py report`.
 
-`account_security` — a class the first taxonomy did not have — scores perfectly on 4
-examples. Four examples is too few to claim much, and the interval on it is enormous.
-
-`app_bug` and `how_to` are the weak classes, and the confusion matrix says where: app_bug
-leaks into playback_issue (3) and account_access (2); product_feedback leaks into how_to
-(4). These are the same boundaries the blind relabel found unstable in a human.
+The confusion matrix says where the weakness is: `app_bug` leaks into `playback_issue` (3)
+and `account_access` (2); `product_feedback` leaks into `how_to` (4). **These are the same
+boundaries the blind relabel found unstable in a human** (§3), so they are answer-key
+defects as much as model errors.
 
 ---
 
@@ -173,15 +159,14 @@ The same classical method that scores 46% on my 60 training rows scores 87% on B
 10,003. That is direct evidence the 46% is a **data-budget artefact rather than a method
 failure**, which matters because it is the number the LLM is being compared against.
 
-This does **not** show robustness to noise: Banking77 queries are clean and well-formed;
-tweets are not. And the published row is a fine-tuned encoder — a reference point, not a
-competition.
+This does **not** show robustness to noise — Banking77 queries are clean, tweets are not —
+and the published row is a fine-tuned encoder, a reference point rather than a competitor.
 
-**One finding transfers.** Banking77's most-confused pairs are `why_verify_identity →
-verify_my_identity`, `unable_to_verify_identity → verify_my_identity`, `card_arrival →
-card_delivery_estimate`. Near-synonymous intents inside a professionally built benchmark —
-independent evidence for §3's claim that *boundaries* are the difficulty, and that a human
-ceiling on fine-grained intent work sits well below 100%.
+**One finding transfers.** Banking77's most-confused pairs (`why_verify_identity →
+verify_my_identity`, `card_arrival → card_delivery_estimate`) are near-synonymous intents
+inside a professionally built benchmark: independent evidence for §3's claim that
+*boundaries* are the difficulty, and that the human ceiling on fine-grained intent work
+sits well below 100%.
 
 ---
 
@@ -236,8 +221,8 @@ instead of the one asked, and the judge accepts it.**
 > **reply:** *"Could you try signing up at … to see if the 60-day offer appears?"*
 > **human: no** — ignores the stated blocker and says try again. **Judge: yes.**
 
-I think the human is right in all three. Each reply is fluent, on-topic and grounded, and
-answers a question the customer did not ask. That is the failure a judge optimising for
+The human is right in all three: each reply is fluent, on-topic and grounded, and answers a
+question the customer did not ask. That is precisely the failure a judge optimising for
 plausibility is least equipped to catch.
 
 ---
