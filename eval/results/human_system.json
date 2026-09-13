@@ -1,0 +1,444 @@
+{
+  "2844619": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "590163": {
+    "grounded": true,
+    "addresses_ask": false,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "language-routing deflection; the phishing/eligibility question is never touched"
+  },
+  "1639591": {
+    "grounded": true,
+    "addresses_ask": false,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "language deflection; the paid-but-still-free billing problem is never touched"
+  },
+  "2709286": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "466075": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1604444": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2602366": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1997209": {
+    "grounded": true,
+    "addresses_ask": false,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "language deflection; the login problem is never touched"
+  },
+  "2161302": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true,
+    "note": "opens by @-mentioning Spotify's own handle instead of the customer"
+  },
+  "1989945": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1789428": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1926348": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2154961": {
+    "grounded": true,
+    "addresses_ask": false,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "language deflection; the prepaid-card question is never touched"
+  },
+  "571347": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "166674": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "848562": {
+    "grounded": false,
+    "addresses_ask": true,
+    "no_overpromise": false,
+    "tone_ok": false,
+    "acceptable": false,
+    "note": "answers in Swedish against the brand's English-on-Twitter pattern, and promises to make sure they get no more Chris Brown recs - no precedent for that promise"
+  },
+  "866201": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1183525": {
+    "grounded": false,
+    "addresses_ask": false,
+    "no_overpromise": false,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "'launching in Australia soon' is invented - precedent says 'we can't make promises'; and they asked about account access, not country availability"
+  },
+  "1272618": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "585113": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2525596": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2239760": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2292732": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2032480": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true,
+    "note": "the redaction placeholder __email__ leaks into a customer-facing reply - tells them to look for mail from '__email__'"
+  },
+  "418866": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": false,
+    "acceptable": true,
+    "note": "a stalker-blocking request answered with a flat feature-request line and no acknowledgement"
+  },
+  "1799077": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1798651": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "716175": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": false,
+    "acceptable": true,
+    "note": "'This out rages me!' met with a bare diagnostic question, no acknowledgement; precedent adds a beat of empathy"
+  },
+  "280234": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2865469": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "832538": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "466058": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true,
+    "note": "dodges the actual yes/no (do stats move?) but stays on topic"
+  },
+  "648641": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "976846": {
+    "grounded": true,
+    "addresses_ask": false,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "assumes they just changed their email and should wait 24-48h; they said the address on file is dead. answers a different question"
+  },
+  "44431": {
+    "grounded": true,
+    "addresses_ask": false,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "gives no path to deactivation and asks for account identifiers in a public tweet"
+  },
+  "2530532": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1973014": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true,
+    "note": "closest precedent for this exact Hulu auth error routes to Hulu support; draft gives activation steps instead"
+  },
+  "317340": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2539075": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1902595": {
+    "grounded": true,
+    "addresses_ask": false,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "ignores the stated blocker (offer not available in my area) and just says try signing up again"
+  },
+  "2308693": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true,
+    "note": "correctly declines to promise anything about the 30 pounds"
+  },
+  "1852269": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1015897": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true,
+    "note": "precedent says the curation team is independent, which sits awkwardly with 'we'll forward your request to the curation team'"
+  },
+  "2289779": {
+    "grounded": true,
+    "addresses_ask": false,
+    "no_overpromise": false,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "device/OS/version cannot resolve a billing charge, and 'we'll investigate the charge and get your premium working ASAP' is a commitment the brand does not make"
+  },
+  "100138": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "310619": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2022689": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2029709": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true,
+    "note": "link is the account-compromise guide; near-verbatim precedent for the same ask, so grounded"
+  },
+  "1911439": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1820744": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2406988": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1343677": {
+    "grounded": false,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "the 4:44 claim and the singles link are lifted from the Taylor Swift Reputation case - wrong artist's singles; also emits a placeholder @123456"
+  },
+  "372630": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1081111": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2552717": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "2338243": {
+    "grounded": false,
+    "addresses_ask": true,
+    "no_overpromise": false,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "the track link belongs to a different artist's album, and 'the full album will be available soon' drops the hedge precedent uses ('hopefully')"
+  },
+  "1689795": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "1966644": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  },
+  "444535": {
+    "grounded": false,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": false,
+    "note": "'our team is looking into why the offer didn't work for you' - no such investigation exists in evidence"
+  },
+  "2558823": {
+    "grounded": true,
+    "addresses_ask": true,
+    "no_overpromise": true,
+    "tone_ok": true,
+    "acceptable": true
+  }
+}

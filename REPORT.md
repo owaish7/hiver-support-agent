@@ -1,294 +1,357 @@
-# Report
+# AI support agent for @SpotifyCares — results and what they are worth
 
-> **Status: awaiting the first real run.** Structure, framing and method are final;
-> every `[TBD]` is a number that gets filled by `python run.py eval`. Nothing here is
-> estimated or predicted.
+Dataset: [Customer Support on Twitter](https://www.kaggle.com/datasets/thoughtvector/customer-support-on-twitter) (CC-BY-NC-SA-4.0).
+Generator `openai/gpt-oss-20b`, judge `qwen/qwen3.8-27b`, embeddings `all-MiniLM-L6-v2` (local).
+Test split n=90, hand-labelled. Every number below is measured; none is estimated.
 
 ---
 
-## 1. Problem framing: what "good" means for this brand
+## 1. Problem framing: what "good" means here
 
-The task as given is three things — classify, draft, escalate. Only one of them has an
-unambiguous notion of correct, and being clear about that shaped everything else.
+The task is three things — classify, draft, escalate — and only two of them have an
+unambiguous notion of correct.
 
 **Intent** has a right answer once the taxonomy is written, so it is scored against hand
-labels with per-class precision/recall/F1.
+labels. **Escalation** has a right answer once the policy is written — but only from rules
+that read the *customer's message*, never from our own model's confidence (§6).
 
-**Escalation** has a right answer once the policy is written, so it is scored the same
-way — but only against rules that read the *customer's message* (E1–E5). Rules that read
-*our own program's confidence* (R1–R2) are excluded from ground truth entirely. See §6.
+**Reply quality has no right answer.** There is no reference reply: the brand's historical
+reply is one option among many, and 41% of this brand's replies are "please DM us". So
+reply quality is judged by an LLM against four binary criteria, and that judge is then
+measured against a human (§5). Until §5 has a number, reply figures are readings from an
+uncalibrated instrument.
 
-**Reply quality has no right answer**, and pretending otherwise is the main way a project
-like this produces a confident number that means nothing. There is no reference reply:
-the brand's historical reply is one option among many, and on this dataset it is often
-"please DM us". So reply quality is judged by an LLM against four binary criteria, and
-that judge is then itself measured against a human. Until §5 has a number in it, every
-reply-quality figure in this report is a reading from an uncalibrated instrument.
+### What "good" specifically means
 
-### What "good" specifically means here
-
-Not resolution rate. A large share of this brand's real replies move the customer to a
-private channel, so a system that maximises "resolved in public" would be optimising for
-something the brand itself does not do. Good means:
-
-1. the intent is right, including on rare intents, hence macro-F1 alongside accuracy;
-2. nothing that needs a human is auto-handled — escalation **recall** on E1–E5;
-3. that safety is not bought by escalating everything — hence **auto-handle rate** is
-   printed beside recall, always;
-4. drafted replies say only what this brand has actually said.
+Not resolution rate. 41% of this brand's real replies move the customer to a private
+channel, so optimising "resolved in public" would optimise for something the brand does
+not do. Good means: the intent is right including on rare intents (hence macro-F1); nothing
+needing a human is auto-handled (escalation **recall**); that safety is not bought by
+escalating everything (hence **auto-handle rate** printed beside it); and drafted replies
+say only what this brand has actually said.
 
 ### What I chose not to build
 
-- **No multi-turn handling.** Items are first-inbound messages only. Later turns inherit
-  the intent above them and would pad the test set with easy near-duplicates. The cost is
-  that nothing about conversation state is measured at all.
-- **No vector database.** At 20k rows retrieval is one matrix multiply.
-- **No fine-tuning.** B2 (TF-IDF + logistic regression) already answers "is the LLM
-  needed"; a fine-tuned encoder would cost a day to make the same point.
-- **No Banking77 *taxonomy*.** 77 retail-banking intents against a 200-row answer key is
-  2.6 examples per class, and the domain is wrong. It is used instead as an external check
-  on the method (§4b), which is a different thing and the more useful one.
+- **No multi-turn handling.** Items are first-inbound messages only; later turns inherit
+  the intent above them. Cost: nothing about conversation state is measured.
+- **No vector database.** At 11,728 indexed rows retrieval is one matrix multiply.
+- **No fine-tuning.** B2 already answers "is the LLM needed".
+- **No Banking77 taxonomy** — but it is used as an external check on the method (§4b).
 - **No sentiment-based escalation.** Angry customers with ordinary problems are ordinary
   problems; "escalate if annoyed" is a queue, not a product.
 - **No UI, no webhook service.** Neither is evidence.
 
 ---
 
-## 2. Data and brand choice
+## 2. Brand choice, decided by measurement
 
-`[TBD]` — table from `data/brand_compare.py`: pairs, substantive replies, rate, median
-reply length for each candidate brand.
+The trap: many support accounts reply "please DM us" to almost everything. Build on one of
+those and "grounded in how the brand resolved this" degrades into "learn to punt", while
+retrieval, the judge and the headline all still look healthy.
 
-The trap this measurement exists to avoid: if most of a brand's replies are "please DM
-us", then "draft a reply grounded in how the brand resolved this" degrades into "learn to
-punt", and the retrieval, the judge and the headline number would all still look healthy.
+| brand | pairs | substantive | rate | median reply words |
+|---|---|---|---|---|
+| **SpotifyCares** | 26,068 | 15,310 | **59%** | 22 |
+| Delta | 24,603 | 10,987 | 45% | 17 |
+| AppleSupport | 74,613 | 30,406 | 41% | 22 |
 
-Chosen brand: `[TBD]`. Substantive-reply rate: `[TBD]`. **That rate is a hard ceiling on
-grounded reply quality**, and it is quoted again in §7.
+Apple has 2.9× the volume and the lowest substantive rate. **59% is a hard ceiling on
+grounded reply quality** and is quoted again in §8.
 
-Corpus: `[TBD]` (customer message → brand reply) pairs, subsampled to 20,000 and committed
-to the repo. Only pairs with a substantive reply enter the retrieval index (`[TBD]` rows).
+This table changed once during the project, which is the reason it exists. The first
+version of the punt detector was a substring list and it missed phrasings like *"let's hop
+into DM"* and *"follow/DM your confirmation number"* — **unevenly**: 6.8% of Spotify's
+"substantive" replies were really punts against 26.5% of Apple's. Apple was inflated by 15
+points and sat in second place. Sensitivity check: the ranking holds for word thresholds
+of 12 and above; at 8 words Delta overtakes Spotify, so the choice is **not**
+threshold-invariant and this report does not claim it is.
 
 ---
 
-## 3. The golden set
+## 3. The golden set and its ceiling
 
-200 hand-labelled messages. Method, strata and declared biases: [`golden/SAMPLING.md`](golden/SAMPLING.md).
+150 hand-labelled messages: 140 random at natural prevalence, 45 topping up rare intents,
+15 deliberately awkward. Split 60 dev / 90 test, **fixed before any label existed** and
+hidden from the labelling tool. Method and declared biases: [`golden/SAMPLING.md`](golden/SAMPLING.md).
 
-- 140 random at natural prevalence, ~45 topping up rare intents, 15 deliberately awkward.
-- 60 dev / 140 test, split assigned before any label existed and hidden while labelling.
-- Class distribution: `[TBD]`, against the true distribution: `[TBD]`.
+The taxonomy is 11 classes derived from reading 100 real messages. Three of them
+(`account_security`, `how_to`, `dm_followup`) were absent from the first draft written
+from a skim — that draft's failure is itself the argument for reading data first.
 
-### Intra-annotator agreement — the ceiling on everything below
+### Intra-annotator agreement — read this before any other number
 
-Blind relabel of 50 rows, 24+ hours later, different order, first answer hidden:
+50 rows relabelled blind, 20+ hours later, shuffled, first answer hidden:
 
-| | raw agreement | Cohen's κ |
-|---|---|---|
-| intent | `[TBD]` | `[TBD]` |
-| escalate | `[TBD]` | `[TBD]` |
+| | raw agreement | Cohen's κ | reading |
+|---|---|---|---|
+| intent | 86.0% | **+0.838** | almost perfect |
+| escalate | 96.0% | +0.728 | substantial |
 
-Most unstable boundaries: `[TBD]`.
+**The answer key is ~86% self-consistent.** A classifier scoring near 86% is at the noise
+floor of its own ground truth and the difference is not measurable with this set. The
+system scores 76%, which sits *below* that ceiling — so the gap to perfect is real and
+measurable rather than an artefact.
 
-This is the number to read first. A classifier cannot be shown to exceed the consistency
-of its own answer key, so any accuracy at or above this level is at the noise floor and
-the difference is not measurable with this set.
+The 7 disagreements were not noise. Four are the same pair:
+
+```
+4x  content_unavailable <-> product_feedback
+1x  app_bug <-> product_feedback
+1x  dm_followup <-> other
+1x  how_to <-> plan_or_family
+```
+
+All four of the first pair are **catalogue metadata errors** — *"they tagged the wrong
+Logic"*, *"the song is named incorrectly"*, *"this album should be placed here"*. The
+content exists and is mislabelled, which is neither "unavailable" nor "feedback". That is
+a missing twelfth class the blind relabel discovered, and it is the top item in §9.
 
 ---
 
 ## 4. Results
 
-`[TBD]` — the table from `python run.py report`, all six configs, intent accuracy with
-95% Wilson intervals, macro-F1, weighted-F1, escalation recall and precision, auto-handle
-rate, tokens and latency per message.
+Test split, n=90. Intent accuracy carries a 95% Wilson interval.
 
-### Reading it
+| config | intent acc | macro‑F1 | wtd‑F1 | esc recall | esc prec | auto‑handled | replies | tok/msg | s/msg |
+|---|---|---|---|---|---|---|---|---|---|
+| B0 trivial (always auto) | 29% ±9 | 0.04 | 0.13 | 0% | 0% | 100% | 0% | 0 | 0.0 |
+| B0 trivial (always escalate) | 29% ±9 | 0.04 | 0.13 | 100% | 8% | 0% | 0% | 0 | 0.0 |
+| B1 canned reply | 29% ±9 | 0.04 | 0.13 | 0% | 0% | 100% | 100% | 0 | 0.0 |
+| B2 TF‑IDF + logistic regression | 46% ±10 | 0.32 | 0.43 | n/a | n/a | n/a | 0% | 0 | 0.0 |
+| B3 retrieval verbatim | 29% ±9 | 0.04 | 0.13 | n/a | n/a | n/a | 100% | 0 | 0.3 |
+| **system** | **76% ±9** | **0.77** | **0.76** | **43%** | **60%** | **94%** | **100%** | 3,464 | 33.9 |
 
-- **vs B0 (trivial)** — the floor. A config near it has learned nothing.
-- **vs B2 (TF-IDF + logistic regression)** — what the LLM is worth. If the gap is small,
-  the honest conclusion is that a classical classifier at ~3ms and zero cost does most of
-  this job.
-- **vs B3 (retrieval verbatim)** — what *generation* is worth. B3 sees identical
-  evidence and does no writing at all, so the gap is the value added by the model
-  composing a reply rather than copying one.
-- **vs B1 (canned)** — whether the reply rubric is measuring anything. A single canned
-  punt sent to every message can score well on grounded/no-overpromise/tone, because it
-  is a real brand reply that promises nothing. If B1 comes close, the finding is about
-  the rubric, not about the system.
+**The intent result is real.** 76% vs 46% (B2) and vs 29% (B0) are gaps far wider than the
+±9 interval. The LLM is worth roughly 30 points over a classical classifier here.
 
-At n=140 the 95% interval is roughly ±6 points. **Any gap smaller than that is not a
-result**, and is not described as one below.
+**B2 is handicapped and the gap is overstated because of it.** It trains on the 60 dev
+rows — about 5 examples per class across 11 classes — because the LLM weak labels were
+generated against the earlier taxonomy and regenerating 400 would have cost ~376k tokens
+against a 200k/day cap. A fairer budget would narrow this gap; how much is unmeasured.
 
-Per-intent breakdown, confusion matrix and hard-subset accuracy: `[TBD]`.
+**B1 and B3 tie with B0 on intent** because neither classifies — they inherit the majority
+class by construction. Their purpose is the reply column, judged in §5.
+
+### Per-intent (system)
+
+| intent | precision | recall | F1 | n |
+|---|---|---|---|---|
+| account_security | 1.00 | 1.00 | 1.00 | 4 |
+| content_unavailable | 0.89 | 0.80 | 0.84 | 10 |
+| product_feedback | 0.95 | 0.73 | 0.83 | 26 |
+| playback_issue | 0.70 | 1.00 | 0.82 | 7 |
+| billing_charge | 1.00 | 0.67 | 0.80 | 6 |
+| plan_or_family | 0.80 | 0.80 | 0.80 | 5 |
+| other | 0.75 | 1.00 | 0.86 | 3 |
+| dm_followup | 1.00 | 0.50 | 0.67 | 2 |
+| account_access | 0.50 | 0.80 | 0.62 | 5 |
+| app_bug | 0.64 | 0.58 | 0.61 | 12 |
+| how_to | 0.50 | 0.70 | 0.58 | 10 |
+
+`account_security` — a class the first taxonomy did not have — scores perfectly on 4
+examples. Four examples is too few to claim much, and the interval on it is enormous.
+
+`app_bug` and `how_to` are the weak classes, and the confusion matrix says where: app_bug
+leaks into playback_issue (3) and account_access (2); product_feedback leaks into how_to
+(4). These are the same boundaries the blind relabel found unstable in a human.
 
 ---
 
 ## 4b. External check: does this work against labels I did not write?
 
-Every number in §4 is measured against labels I wrote, using prompts I also wrote. A fair
-reviewer can ask how much of the accuracy is the classifier being good and how much is the
-answer key being shaped like the classifier. This section answers that without depending
-on my answer key at all.
+Every number above is graded against labels I wrote, using prompts I also wrote. Banking77
+([PolyAI](https://github.com/PolyAI-LDN/task-specific-datasets), CC-BY-4.0;
+[Casanueva et al. 2020](https://arxiv.org/abs/2003.04807)) is 3,080 test queries across 77
+intents labelled by someone else.
 
-Banking77 ([PolyAI](https://github.com/PolyAI-LDN/task-specific-datasets), CC-BY-4.0;
-Casanueva et al. 2020, [arXiv:2003.04807](https://arxiv.org/abs/2003.04807)): 3,080 test
-queries, 77 intents, labelled by someone else, with published reference numbers.
-
-| approach | accuracy | macro-F1 | n | classes |
+| approach | accuracy | macro‑F1 | n | classes |
 |---|---|---|---|---|
-| TF-IDF + logistic regression | **87% ±1** | 0.874 | 3,080 | 77 |
-| LLM zero-shot, same prompting approach as `agent/classify.py` | `[TBD]` | `[TBD]` | 231 | 77 |
+| TF‑IDF + logistic regression | **87% ±1** | 0.874 | 3,080 | 77 |
 | fine-tuned ModernBERT (published) | 94% | 0.940 | 3,080 | 77 |
 
-The LLM row is sampled 3 per intent so all 77 classes appear; the test split is already
-balanced at 40 per intent, so stratifying preserves its distribution rather than distorting
-it. Predictions outside the taxonomy are counted wrong, not dropped.
+The same classical method that scores 46% on my 60 training rows scores 87% on Banking77's
+10,003. That is direct evidence the 46% is a **data-budget artefact rather than a method
+failure**, which matters because it is the number the LLM is being compared against.
 
-**What this does not show**, and the report would be dishonest without saying so:
+This does **not** show robustness to noise: Banking77 queries are clean and well-formed;
+tweets are not. And the published row is a fine-tuned encoder — a reference point, not a
+competition.
 
-- Banking77 queries are clean, short and well-formed. Tweets are typo-ridden, sarcastic,
-  emoji-laden and often barely parseable. This tests the **method**, not robustness to
-  noise. A strong score here beside a weak score on tweets would itself be the finding.
-- The published row is a fine-tuned encoder that saw 10,003 labelled training examples.
-  The LLM row is zero-shot. A reference point, not a competition.
-- Retail banking, not music streaming. Nothing here transfers to the Spotify taxonomy.
-
-**One finding does transfer.** The pairs Banking77 confuses most are
-`why_verify_identity → verify_my_identity`, `unable_to_verify_identity →
-verify_my_identity`, `card_arrival → card_delivery_estimate` and `top_up_reverted →
-top_up_failed`. Those are near-synonymous intents inside a professionally constructed
-benchmark. That is independent evidence for the claim §3 makes about this project's own
-taxonomy: the **boundaries** are where the difficulty lives, and the human ceiling on
-fine-grained intent work is well below 100%.
+**One finding transfers.** Banking77's most-confused pairs are `why_verify_identity →
+verify_my_identity`, `unable_to_verify_identity → verify_my_identity`, `card_arrival →
+card_delivery_estimate`. Near-synonymous intents inside a professionally built benchmark —
+independent evidence for §3's claim that *boundaries* are the difficulty, and that a human
+ceiling on fine-grained intent work sits well below 100%.
 
 ---
 
 ## 5. Does the judge agree with a human?
 
-The brief asks for this by name, and it gates §4's reply column.
+60 replies rated by hand on the same four binary dimensions, blind to the judge, in
+shuffled order. 51 overlap with judged items (the judge reached 76 of 90 before hitting
+its own daily token cap).
 
-60 replies graded by hand on the same four binary dimensions, blind to the judge, in
-shuffled order.
+| dimension | raw | Cohen's κ | reading | judge says yes | human says yes |
+|---|---|---|---|---|---|
+| grounded | 96% | +0.778 | substantial | 90% | 90% |
+| addresses_ask | 88% | +0.346 | fair | 94% | 86% |
+| no_overpromise | 98% | +0.847 | almost perfect | 94% | 92% |
+| tone_ok | 96% | **+0.000** | slight | 100% | 96% |
+| **acceptable** | 88% | **+0.599** | moderate | 86% | 78% |
 
-| dimension | raw agreement | Cohen's κ | judge says yes | human says yes |
-|---|---|---|---|---|
-| grounded | `[TBD]` | `[TBD]` | `[TBD]` | `[TBD]` |
-| addresses_ask | `[TBD]` | `[TBD]` | `[TBD]` | `[TBD]` |
-| no_overpromise | `[TBD]` | `[TBD]` | `[TBD]` | `[TBD]` |
-| tone_ok | `[TBD]` | `[TBD]` | `[TBD]` | `[TBD]` |
-| **acceptable** | `[TBD]` | `[TBD]` | `[TBD]` | `[TBD]` |
+**`tone_ok` is a live demonstration of the kappa paradox**: 96% raw agreement and κ=0.000,
+because both raters say yes essentially always, so chance agreement is already ~96%. Raw
+agreement alone would have reported this dimension as near-perfect; it carries no
+information at all. This is exactly why both columns are printed everywhere in this repo.
 
-2×2 on `acceptable`: `[TBD]`. Direction of error: `[TBD]`.
+2×2 on `acceptable`:
 
-Both raw agreement and κ are reported because they answer different questions, and κ can
-look poor at high raw agreement when one verdict dominates (the kappa paradox). The
-per-dimension split matters more than the aggregate: "the judge is unreliable" is not
-actionable, "the judge and I disagree specifically about groundedness" names the rubric
-line to rewrite.
+| | judge yes | judge no |
+|---|---|---|
+| **human yes** | 39 | 1 |
+| **human no** | 5 | 6 |
 
-Three real disagreements, quoted, with my view on who was right: `[TBD]`.
+**The judge is too generous** — it passes 5 replies a human rejected and rejects 1 a human
+passed. So **the reply-quality figure is an upper bound**, and the judge's 86% should be
+read against the human's 78%.
+
+`addresses_ask` at κ=0.346 is the weakest dimension and carries almost all the
+disagreement. That is actionable in a way "the judge is unreliable" is not: it names the
+one rubric line to rewrite.
+
+### The disagreements, and what they found
+
+All six splits on `acceptable` share a shape: **the system answers a nearby question
+instead of the one asked, and the judge accepts it.**
+
+> **customer:** *"Hari ini ngga bisa login di handphone, kenapa yah padahal email dan password benar"*
+> **reply:** *"We can help out in English via Twitter, but we also have Indonesian support via email at …"*
+> **human: no** — language deflection; the login problem is never touched. **Judge: yes.**
+
+> **customer:** *"Email associated with fb account is no longer active but is on file with my subscription. How do I fix?"*
+> **reply:** *"It can take 24-48 hours for the email to update. If it still doesn't change by then, let us know."*
+> **human: no** — assumes they just changed their email and should wait; they said the address on file is dead. **Judge: yes.**
+
+> **customer:** *"Followed migration steps, but when activating 60 days premium trial, says its not available in my area."*
+> **reply:** *"Could you try signing up at … to see if the 60-day offer appears?"*
+> **human: no** — ignores the stated blocker and says try again. **Judge: yes.**
+
+I think the human is right in all three. Each reply is fluent, on-topic and grounded, and
+answers a question the customer did not ask. That is the failure a judge optimising for
+plausibility is least equipped to catch.
 
 ---
 
 ## 6. The escalation design, and the one thing it refuses to do
 
-Ground truth for escalation comes only from rules that read the customer's message:
-hacked account, disputed charge, legal threat, safety, repeat contact.
+Ground truth comes only from rules reading the customer's message (E1–E5: hacked account,
+disputed charge, legal threat, safety, repeat contact). Rules reading *our own program* —
+classifier confidence below τ=0.55, retrieval similarity below σ=0.45 — may **trigger** an
+escalation at run time but never define the correct answer.
 
-Rules that read our own program — classifier confidence below τ, retrieval similarity
-below σ — are allowed to *trigger* an escalation at run time but are **never** allowed to
-define the correct answer.
+If they did, the system could not be wrong: any time it hesitated, hesitating would be
+correct by definition. The eval would print a confident number and measure nothing.
+Instead those extra escalations show up as a **drop in escalation precision**, pricing
+caution visibly.
 
-If they were, the system could not be wrong. Any time it hesitated, hesitating would be
-correct by definition; the eval would print a high number and measure nothing. Instead,
-those extra escalations show up as a **drop in escalation precision**, which prices
-caution visibly rather than hiding it inside the definition of correct.
+Escalations by source on test: E1 ×2, E2 ×1, R1 ×1, R2 ×1. So 2 of 5 escalations came from
+runtime signals, and precision is 60% — the two R-triggered ones are the cost.
 
-τ = `[TBD]`, σ = `[TBD]`, both tuned on dev only.
-Escalations by source (E1–E5 vs R1/R2): `[TBD]`.
+**τ and σ were never tuned.** The token budget did not allow a dev sweep, so the defaults
+in `config.py` were used and the test split was touched once. That removes any risk of test
+contamination and also means these thresholds are almost certainly not optimal.
 
 ---
 
-## 7. Failure analysis
+## 7. Failure analysis — top 5
 
-`[TBD]` — top 5 failure modes, each with real quoted examples and a hypothesis.
+**1. Escalation rules under-fire on real language. (recall 43%, 4 of 7 missed)**
+Every miss has the same cause: E1–E5 are English keyword patterns.
 
-Expected candidates, to be confirmed or dropped against actual failures:
+- *"The email associated with my account was changed and it wasn't me!"* — E1 requires
+  "not me" near *login* or *charge*, not near *email*. **Account takeover, auto-handled.**
+- *"you have charged me more for my subscription when I have the student account"* — E2
+  matches "charged me twice/again", not "charged me more".
+- A Dutch security complaint — **the rules cannot fire on non-English text at all.**
+- *"tried for months to cancel, no option to cancel in app"* — arguably a correct non-fire;
+  no charge is disputed. I kept the human label and flagged the disagreement.
 
-1. **The DM-punt ceiling.** Where the brand's real answer was "DM us", a grounded reply
-   is a well-phrased punt. Groundedness scores well; nothing is resolved.
-2. **Multi-intent messages.** Two genuine asks, one label. The confusion matrix should
-   show this concentrated in specific pairs.
-3. **Boundary pairs that flipped in the blind relabel.** Where the human was unstable,
-   the model has no stable target to hit — these are answer-key defects, not model errors.
-4. **Retrieval finding topically similar but situationally wrong precedents.** Cosine
-   similarity does not know that "cancel because I'm moving country" and "cancel because
-   you charged me twice" need different replies.
-5. **Non-English and near-empty messages.** Over-represented in the hard stratum by design.
+This is the same failure class as the DM-punt detector in §2: a keyword rule that looks
+complete and under-fires on phrasing it did not anticipate. It is the single most important
+defect in the system, because the cost is asymmetric — a missed security escalation is not
+symmetric with an unnecessary one.
+
+**2. Language deflection.** Non-English messages get routed to language support instead of
+answered (§5). The judge passes these. Two of 60 human-rated replies; more in the corpus.
+
+**3. Answering a nearby question.** The reply is fluent, grounded and on-topic, and
+addresses something the customer did not ask — the dead-email and not-available-in-my-area
+cases in §5. `addresses_ask` is where human and judge disagree most (κ=0.346).
+
+**4. Retrieval finds topically similar, situationally wrong precedent.** *"you charged me
+twice for premium and it still says free"* retrieved playback troubleshooting and the
+drafter produced *"does logging out and back in help?"*. Cosine similarity does not know
+that a billing complaint and a playback complaint need different replies.
+
+**5. The unstable boundaries are unstable for the model too.** `app_bug`↔`playback_issue`
+(3), `product_feedback`↔`how_to` (4), `app_bug`↔`account_access` (2) — the same pairs the
+human flip-flopped on in §3. These are answer-key defects as much as model errors, which is
+why intra-annotator agreement is reported first.
 
 ---
 
 ## 8. What is misleading about my headline number
 
-Mandatory section, and the one I would read first if I were reviewing this.
+1. **The golden set's class mix is not the real one.** Rare intents were topped up, so
+   macro-F1 (0.77) is computed on a distribution that does not exist in the wild.
+   Weighted-F1 (0.76) is closer to what a random customer experiences. They happen to be
+   almost identical here, which is luck, not design.
 
-1. **The golden set's class mix is not the real one.** Rare intents were topped up to ~20
-   examples, so macro-F1 is computed on a distribution that does not exist in the wild
-   and flatters rare classes. True distribution: `[TBD]`. Weighted-F1 (`[TBD]`) is closer
-   to what a random customer experiences.
+2. **One person wrote the labels and the prompts.** My sense of where `billing_charge` ends
+   and the model's came from the same head. Blind self-agreement was κ=0.838 — that is the
+   measurement ceiling, and 76% is below it, so there is real room. §4b is a partial
+   counterweight, not a fix.
 
-2. **One person wrote the labels *and* the prompts.** My idea of where `billing_payment`
-   ends and the model's came from the same head, so they are correlated in a way a second
-   annotator's would not be. My own blind self-agreement was κ=`[TBD]` — that is the
-   measurement ceiling, and accuracy at or above it is unverifiable with this answer key.
-   §4b is a partial counterweight: the same method scores 87% ±1 on Banking77, where the
-   labels are PolyAI's rather than mine. Partial, not a fix — different domain, cleaner
-   text, and it says nothing about whether *my* eight categories are the right eight.
+3. **"Grounded" is graded against replies that are 41% DM punts.** A high groundedness
+   score partly measures how well the agent learned to punt, which is not resolution.
 
-3. **"Grounded" is graded against replies that are frequently "DM us."** `[TBD]`% of this
-   brand's replies are non-substantive. A high groundedness score therefore partly
-   measures how well the agent learned to punt to a human, which is not resolution.
+4. **n=90 means ±9 points.** The system-vs-B2 gap (30 points) survives that easily; nothing
+   smaller than ~18 points between two configs here is a finding.
 
-4. **n=140 means ±6 points.** Every comparison in §4 smaller than its confidence interval
-   is noise. I have not described any such gap as an improvement.
+5. **An LLM wrote the replies and an LLM graded them**, and the judge agrees with a human
+   at κ=0.599 while being **too generous**. Reply quality is an upper bound: judge 86%,
+   human 78% on the same 51 items. The judge covers 76 of 90 replies, not all of them,
+   because it hit its own daily token cap.
 
-5. **An LLM wrote the replies and an LLM graded them.** The judge agrees with a human at
-   κ=`[TBD]`, and errs in the `[TBD]` direction — so the reply-quality figure is a
-   `[TBD]` (upper/lower) bound, not a point estimate.
+6. **Escalation recall (43%) is measured on 7 positive examples.** The interval on that is
+   enormous. The direction is certain — rules under-fire — but the magnitude is not.
 
-6. **Escalation recall is trivially gameable.** Escalating everything scores 100% and is
-   useless, which is why `trivial_always_escalate` is a row in the table and auto-handle
-   rate sits beside recall everywhere.
+7. **Escalation labels are partly rule-derived.** Hand-confirmation was only asked where a
+   rule fired or the intent made a human plausible; 36 of 150 rows were hand-confirmed and
+   the rest taken as auto-handle by the policy's definition.
 
-7. **Rows were surfaced for labelling by machine weak-labels.** Whatever kind of message
-   the weak labeller systematically misses was never offered for hand-labelling, so this
-   answer key has a blind spot whose size I cannot measure from inside it.
+8. **Near-duplicate messages make retrieval look easier.** Retrieval excludes each item's
+   own row by id, but thousands of customers type near-identical complaints.
 
-8. **Near-duplicate messages make retrieval look easier than it is.** Retrieval excludes
-   each item's own row by id, but thousands of customers type near-identical complaints,
-   and `[TBD]`% of the corpus is an exact-text duplicate of another row. Matching two
-   different customers with the same problem is the system working correctly, so these
-   are not removed — but it does mean top-1 similarity is higher here than it would be
-   against genuinely unseen phrasing.
-
-9. **Test-set exposure.** Tuning happened on dev; test was run `[TBD]` time(s). `[TBD]`
+9. **Nothing was tuned.** τ, σ and every prompt are untuned defaults. No overfitting risk,
+   and no optimisation either — these numbers are a floor for this design, not its best.
 
 ---
 
 ## 9. What I would do next with one more week
 
-1. **A second annotator on 100 rows.** Intra-annotator κ bounds the answer key, but only
-   inter-annotator κ shows whether the taxonomy is communicable to anyone else. That is
-   the single highest-value missing measurement.
-2. **Calibrate confidence.** The classifier's self-reported confidence gates R1 and is
-   currently trusted as a threshold input without evidence. Bucket predictions by
-   confidence and plot actual accuracy per bucket; the expectation is it claims ~95%
-   while being right ~75%, which would mean τ rests on a number the model invented.
-   Replace it with agreement across 3 samples and re-tune.
-3. **Rewrite the rubric line the per-dimension κ identifies as weakest, and re-measure.**
-   Judge validation is only useful if it changes the judge.
-4. **Multi-turn.** The biggest scoped-out piece. Escalation rule E5 (repeat contact) is
-   currently the only thread-aware rule and cannot fire on single-message items.
-5. **Retrieval quality as its own metric.** Every reply-quality number currently confounds
-   retrieval and generation. Hand-label whether the top-5 evidence was *usable* for 100
-   items and report retrieval precision separately.
+1. **Add `catalogue_error` as a twelfth intent.** The blind relabel found it: four of seven
+   self-disagreements are metadata corrections that fit neither existing class. This is the
+   highest-value change and it came from measurement, not intuition.
+2. **Replace the escalation keyword rules with a classifier.** §7's root cause is that
+   regexes under-fire on unanticipated phrasing and cannot read non-English at all. An
+   escalation classifier trained on the E-rule definitions, validated against the same hand
+   labels, is the direct fix.
+3. **A second annotator on 50 rows.** Intra-annotator κ bounds the answer key; only
+   inter-annotator κ shows the taxonomy is communicable to anyone else.
+4. **Rewrite the `addresses_ask` rubric line and re-measure.** κ=0.346 is where judge and
+   human diverge, and every quoted disagreement in §5 splits on it. Judge validation is
+   only useful if it changes the judge.
+5. **Calibrate confidence.** The classifier self-reports 1.0 routinely and R1 gates on it.
+   Bucket by confidence, plot real accuracy per bucket, and replace it with agreement across
+   3 samples if it is as miscalibrated as it looks.

@@ -1,6 +1,6 @@
 # Decision log
 
-Non-obvious choices and why. Numbers marked `[TBD]` are filled after the first real run.
+Non-obvious choices and why. Every number here is measured.
 
 ---
 
@@ -9,7 +9,8 @@ Many support accounts on this dataset reply "please DM us" to almost everything.
 one of those and "draft a reply grounded in how the brand resolved this" quietly becomes
 "learn to say DM us" — the retrieval works, the eval passes, the system has learned
 nothing. `data/brand_compare.py` measures the substantive-reply rate across three
-candidates first. Chosen: `[TBD]` at `[TBD]`% substantive.
+candidates first. Chosen: **SpotifyCares, 59% substantive** (26,068 pairs), against
+Delta 45% and AppleSupport 41% -- Apple has 2.9x the volume and the lowest rate.
 
 **2. One item = the first customer message of a thread.**
 Later turns ("ok thanks", "still broken") inherit the intent of the message above them.
@@ -21,7 +22,7 @@ the report as a limitation rather than a feature.
 Two different uses, and only the first is a bad idea.
 
 *Rejected:* using its 77 retail-banking intents as this project's category list. Wrong
-domain, and 77 classes against a 200-row answer key is 2.6 examples per class, which
+domain, and 77 classes against a 150-row answer key is 2 examples per class, which
 measures nothing.
 
 *Adopted:* running the same classification method against it to get a number that does not
@@ -32,7 +33,11 @@ with published reference numbers.
 
 Measured so far, with no API calls: TF-IDF + logistic regression trained on the 10,003-row
 train split scores **87% ±1 accuracy, 0.874 macro-F1** on all 3,080 test rows, against a
-published fine-tuned ModernBERT reference of 94%. LLM zero-shot row: `[TBD]`.
+published fine-tuned ModernBERT reference of 94%. The LLM zero-shot row was not run: the
+free-tier token budget went to the main eval, which is the deliverable. The TF-IDF row
+already makes the point that matters -- the same classical method scores 46% on 60
+training rows here and 87% on Banking77's 10,003, so the low in-project score is a
+data-budget artefact rather than a method failure.
 
 Stated limits, in the report rather than buried: Banking77 queries are clean and
 well-formed while tweets are not, so this tests the method and not robustness to noise;
@@ -58,10 +63,19 @@ When the model answers with a label that is not in the list, that is a wrong ans
 Dropping those rows as "errors" would quietly remove the model's worst failures from the
 accuracy figure.
 
-**4. Eight intents, not twenty.**
-A class with three examples has a standard error near 30 points, so "the model is bad at
-`content_missing`" would be unfalsifiable. Fewer classes with real support beats more
-classes with decorative ones.
+**4. Eleven intents, and the first eight were wrong.**
+The first list was written from a skim and missed three real categories -- `account_security`
+(an account takeover is not a forgotten password), `how_to` (a question is not a fault, and
+it is the best auto-handle case in the corpus) and `dm_followup` ("check your DMs" is not a
+support request, and it is 3% of traffic). It also pooled feature requests with praise,
+hiding the largest single cluster. The weak-label distribution showed the damage: 22% landed
+in `other`. Reading 100 messages fixed it, and that failure is the argument for reading data
+before defining categories.
+
+Eleven rather than twenty because a class with three examples has a standard error near 30
+points, so "the model is bad at X" would be unfalsifiable. Two classes still ended up at
+n<=4 in test (`dm_followup`, `account_security`) and their per-class numbers are quoted with
+that caveat.
 
 **5. The taxonomy came from reading, and clustering only checked it.**
 100 messages read by hand; embedding clustering run afterwards purely to catch a category
@@ -71,14 +85,15 @@ the customer wants, and a label nobody wrote cannot be defended in an interview.
 **6. Boundary rules are the taxonomy; the class list is just names.**
 Two people only agree on labels if they agree on where the boundaries are. Every rule in
 `taxonomy/intents.py` came from a specific message that was genuinely ambiguous — e.g.
-"charged twice, cancel my Premium" is `billing_payment`, because the money problem is the
-ask and cancelling is the customer's proposed remedy.
+"charged twice, cancel my Premium" is `billing_charge`, because the money problem is the
+ask and cancelling is the customer's proposed remedy. Each rule cites the message number
+in the reading sample that forced it.
 
 **7. The escalation policy is written twice — and the code is NOT an oracle.**
 Prose goes into the prompt, code checks the labels. No keyword list can decide whether
 "see you in court" is a real legal threat, so the hand labels remain ground truth and the
 code only reports disagreements for a human to resolve. Deliberate exceptions kept after
-review: `[TBD]`. That count is itself a measurement of how much of the policy needs
+review: **9 of 150**. That count is itself a measurement of how much of the policy needs
 judgement.
 
 **8. Ground truth uses content rules only (E1–E5). Runtime signals (R1, R2) never define
@@ -105,17 +120,17 @@ would route a large share of all support tweets to a human, which is a queue, no
 product.
 
 **12. Local embeddings, not an embedding API.**
-`all-MiniLM-L6-v2` on CPU: no rate limits during a 200-item run, byte-identical results
+`all-MiniLM-L6-v2` on CPU: no rate limits during an eval run, byte-identical results
 every time, and the index rebuilds with no API key. That last point is what actually makes
 the 15-minute reproduction promise true for a reviewer who has no keys.
 
 **13. NumPy, not a vector database.**
-At 20k rows the entire retrieval engine is one `@` and an argsort. FAISS or Chroma would
+At 11,728 indexed rows the entire retrieval engine is one `@` and an argsort. FAISS or Chroma would
 add a dependency, a build step and a failure mode in exchange for nothing measurable.
 
 **14. Only substantive replies go into the index.**
 A "please DM us" reply is not a resolution and cannot ground anything. Indexing punts
-would let the drafter retrieve five of them and confidently produce a sixth. This also
+would let the drafter retrieve four of them and confidently produce a fifth. This also
 means the DM-punt rate is a hard ceiling on how good grounded replies can be, which is
 reported rather than worked around.
 
@@ -128,7 +143,7 @@ reading the code.
 Excluding by id is the right guard and not a complete one. Two *different* customers
 writing near-identical complaints is legitimate evidence and should be retrieved — that is
 the system working. But if the same message text appears in the corpus twice under two
-ids, exclusion by id will not catch the second copy. Duplicate rate measured at `[TBD]`%;
+ids, exclusion by id will not catch the second copy. Duplicate rate measured at 1%;
 the effect is to make retrieval look slightly easier than it is, and it is listed in the
 report's misleading-numbers section rather than silently patched, because the fix
 (dropping near-duplicates) would also drop genuine repeat complaints.
@@ -172,7 +187,9 @@ Commit, then see the check, then decide whether the call stands.
 With one annotator this is the only honest ceiling available: disagree with yourself 12%
 of the time and a classifier scoring 88% is at the noise floor of the answer key. The tool
 refuses to run before 20 hours have passed, because relabelling from memory measures
-recall rather than whether the definitions are stable. Result: `[TBD]`.
+recall rather than whether the definitions are stable. Result: **intent kappa +0.838**
+(raw 86.0%), **escalate kappa +0.728** (raw 96.0%). The system scores 76%, below that
+ceiling, so the remaining gap is real rather than answer-key noise.
 
 **22. Four baselines, because each kills a different objection.**
 Trivial reads nothing (is the model doing anything?). Canned sends the brand's most common
@@ -219,7 +236,9 @@ the drafter never saw.
 
 **30. Every reply-quality number is held to be uncalibrated until `agreement.py` runs.**
 The judge is an instrument. An instrument nobody has checked produces readings, not
-evidence. Result: `[TBD]`.
+evidence. Result: **kappa +0.599 on `acceptable`** (n=51), and the judge is **too
+generous** -- it passes 5 replies a human rejected and rejects 1 it should have passed. So
+reply quality is reported as an upper bound: judge 86%, human 78% on the same items.
 
 **31. Results are cached per item, and `--report` calls nothing.**
 A crash at item 190 must not discard 189 paid-for calls, and a reviewer with no API key
@@ -237,3 +256,30 @@ without that interval would be the easiest way to mislead in this whole project,
 Cohen's kappa, the Wilson interval and macro/weighted F1 all get quoted in the report and
 asked about live, so they are written out in a form that can be defended line by line —
 and cross-checked against `sklearn` and `statsmodels`, which they match exactly.
+
+
+---
+
+**39. The escalation recall of 43% is reported as the headline weakness, not buried.**
+Three of seven messages needing a human were routed there. Every miss has one cause: E1-E5
+are English keyword patterns that under-fire on unanticipated phrasing -- "my email was
+changed and it wasn't me" (E1 wants "not me" near *login* or *charge*), "charged me more"
+(E2 matches "charged me twice/again"), and a Dutch security complaint the rules cannot read
+at all. Same failure class as the DM-punt detector in #1. The cost is asymmetric: a missed
+security escalation is not symmetric with an unnecessary one.
+
+**40. Thresholds were never tuned, and that is stated rather than implied.**
+The free-tier token budget did not allow a dev sweep, so tau and sigma are the defaults in
+config.py and test was run once. No risk of test contamination, and no optimisation either
+-- these numbers are a floor for this design rather than its best.
+
+**41. The judge covers 76 of 90 replies, not all of them.**
+It hit its own daily token cap. 51 of those overlap the 60 hand-rated replies, which is
+what the agreement number is computed on. Reported as n=51 rather than implying full
+coverage.
+
+**42. Labelling stopped at 150, the brief's lower bound.**
+150-250 was the stated range. The time available went to labelling carefully and to the
+blind second pass, which produces a number almost no submission has, rather than to 50 more
+rows labelled faster. The cost is a wider interval: +-9 points at n=90 test instead of +-6
+at n=140.

@@ -19,38 +19,44 @@ The system is the small half of this repo. The evidence is the large half.
 
 ## Results
 
-> ### ⚠️ NOT YET RUN — every number below is a dash
->
-> The pipeline is complete and tested offline (19/19 tests pass), but no config has been
-> run against the golden set yet. **Do not quote a figure from this project until this
-> table is filled in by a real run.** Fill it with:
->
-> ```bash
-> python run.py eval
-> ```
-
-| config | intent acc | macro‑F1 | wtd‑F1 | esc recall | esc prec | auto‑handled | reply acceptable |
+| config | intent acc | macro‑F1 | wtd‑F1 | esc recall | esc prec | auto‑handled | replies |
 |---|---|---|---|---|---|---|---|
-| B0 trivial (always auto) | – | – | – | 0% | – | 100% | – |
-| B0 trivial (always escalate) | – | – | – | 100% | – | 0% | – |
-| B1 canned reply | – | – | – | – | – | – | – |
-| B2 TF‑IDF + logistic regression | – | – | – | n/a | n/a | n/a | n/a |
-| B3 retrieval verbatim | n/a | n/a | n/a | n/a | n/a | n/a | – |
-| **system** | **–** | **–** | **–** | **–** | **–** | **–** | **–** |
+| B0 trivial (always auto) | 29% ±9 | 0.04 | 0.13 | 0% | 0% | 100% | 0% |
+| B0 trivial (always escalate) | 29% ±9 | 0.04 | 0.13 | 100% | 8% | 0% | 0% |
+| B1 canned reply | 29% ±9 | 0.04 | 0.13 | 0% | 0% | 100% | 100% |
+| B2 TF‑IDF + logistic regression | 46% ±10 | 0.32 | 0.43 | n/a | n/a | n/a | 0% |
+| B3 retrieval verbatim | 29% ±9 | 0.04 | 0.13 | n/a | n/a | n/a | 100% |
+| **system** | **76% ±9** | **0.77** | **0.76** | **43%** | **60%** | **94%** | **100%** |
 
-Intent accuracy carries a 95% Wilson interval. At n=140 that is roughly ±6 points, so
-**a gap smaller than the interval is not a result**, and the report says so rather than
-claiming it.
+Test split n=90, hand-labelled. Generator `openai/gpt-oss-20b`, judge `qwen/qwen3.8-27b`.
 
-### External check — the one number already measured
+**Read these two numbers before the headline:**
 
-Every other figure here is graded against labels I wrote myself. This one is not:
+| | value | what it bounds |
+|---|---|---|
+| **Intra-annotator κ** (intent) | **+0.838** | the answer key is ~86% self-consistent, so 76% sits below the ceiling and the remaining gap is real |
+| **Judge-vs-human κ** (acceptable) | **+0.599** | the judge is *too generous* — it passes 5 replies a human rejected and rejects 1 it should have passed. Reply quality is an upper bound: judge 86%, human 78% |
+
+**The honest weakness: escalation recall is 43%.** It caught 3 of 7 messages that needed a
+human. Every miss has one cause — the escalation rules are English keyword patterns that
+under-fire on real phrasing, including *"my email was changed and it wasn't me"* (an
+account takeover, auto-handled) and a Dutch security complaint the rules cannot read at
+all. Full analysis in [`REPORT.md`](REPORT.md) §7.
+
+Intent accuracy carries a 95% Wilson interval. At n=90 that is roughly ±9 points, so
+**a gap smaller than the interval is not a result**. The 30-point gap over B2 survives it
+easily; nothing smaller than ~18 points between two configs here is a finding.
+
+### External check — against labels I did not write
 
 | approach | accuracy | macro-F1 | n | classes |
 |---|---|---|---|---|
 | TF-IDF + logistic regression on **Banking77** | **87% ±1** | 0.874 | 3,080 | 77 |
-| LLM zero-shot, same prompting as `agent/classify.py` | – | – | 231 | 77 |
 | fine-tuned ModernBERT (published reference) | 94% | 0.940 | 3,080 | 77 |
+
+The same classical method scores 46% on my 60 training rows and 87% on Banking77's 10,003.
+That is evidence the 46% is a **data-budget artefact, not a method failure** — which
+matters, because it is the number the LLM is being compared against.
 
 [Banking77](https://github.com/PolyAI-LDN/task-specific-datasets) is 3,080 queries across
 77 intents labelled by PolyAI. It is **not** used to define this project's taxonomy — 77
@@ -62,15 +68,6 @@ anyone can raise against a single-annotator project. Runs free and offline:
 Its most-confused pairs (`why_verify_identity → verify_my_identity`, `card_arrival →
 card_delivery_estimate`) are outside evidence for the argument this project makes about
 its own categories: **boundaries are the hard part, not the class list.**
-
-Two numbers bound everything else and both appear before the headline in the report:
-
-- **Intra‑annotator kappa** — agreement between the labeller and themselves, blind, a day
-  apart. If the answer key is only 88% self‑consistent, a classifier scoring 88% is at
-  the noise floor and nothing above it is measurable.
-- **Judge‑vs‑human kappa** — reply quality is graded by an LLM, so that LLM is an
-  instrument. Until it is calibrated against a human, its output is a reading, not
-  evidence.
 
 ---
 
@@ -90,13 +87,13 @@ Prove the machinery rather than taking it on trust — also offline, also second
 python run.py check
 ```
 
-That runs 19 tests including the two leakage guards described below, and verifies every
+That runs 24 tests including the four leakage guards described below, and verifies every
 statistic in the report against `sklearn` and `statsmodels`.
 
 ### Running it live
 
 ```bash
-cp .env.example .env          # GEMINI_API_KEY (generator), GROQ_API_KEY (judge)
+cp .env.example .env          # GROQ_API_KEY (both generator and judge)
 python run.py setup           # threads -> brand choice -> 20k sample -> embedding index
 python eval/run_eval.py --config system --limit 5    # smoke test before spending quota
 python run.py eval
@@ -112,26 +109,28 @@ python run.py eval
 ```
 message
    |
-   +-- classify        Gemini, structured output, 8 intents defined from the data
+   +-- classify        structured output, 11 intents derived from reading 100 messages
    |
-   +-- retrieve        top-5 similar past cases, local MiniLM embeddings + numpy
+   +-- retrieve        top-4 similar past cases, local MiniLM embeddings + numpy
    |
-   +-- draft           reply using ONLY those 5 cases as evidence
+   +-- draft           reply using ONLY those 4 cases as evidence
    |
    +-- escalate        content rules first, runtime signals second, reason always stated
 ```
 
-**Retrieval is a NumPy array and one `@`.** At 20k rows a vector database would add a
-dependency, a build step and a failure mode in exchange for nothing measurable. Knowing
-when not to reach for infrastructure is part of the answer.
+**Retrieval is a NumPy array and one `@`.** At 11,728 indexed rows a vector database
+would add a dependency, a build step and a failure mode in exchange for nothing
+measurable. Knowing when not to reach for infrastructure is part of the answer.
 
-**Embeddings are local** (`all-MiniLM-L6-v2`, CPU). No rate limits during a 200-item run,
+**Embeddings are local** (`all-MiniLM-L6-v2`, CPU). No rate limits during an eval run,
 identical results every time, and the index rebuilds with no API key — which is what
 makes the 15-minute promise hold.
 
-**The generator and the judge are different model families.** Gemini writes, Llama 3.3 on
-Groq grades. Models score their own family's output more generously, so self-grading
-would inflate the headline by an amount nobody can measure.
+**The generator and the judge are different model families.** `gpt-oss-20b` writes,
+`qwen3.8-27b` grades. Models score their own family's output more generously, so
+self-grading would inflate the headline by an amount nobody can measure. What matters is
+the separate training lineage, not the host — both happen to run on Groq, chosen after the
+Gemini free tier turned out to allow 20 requests per day.
 
 ---
 
@@ -158,7 +157,7 @@ reports disagreements for review.
 
 ---
 
-## Two leakage guards, both tested
+## Four leakage guards, all tested
 
 Each of these would have inflated every number in the report while leaving the code
 looking correct.
@@ -167,11 +166,15 @@ looking correct.
    corpus the index is built from. Without `exclude_id`, the nearest neighbour of a
    golden item is itself at similarity 1.0, and the drafter is handed the exact reply it
    is about to be graded against.
-2. **B2 excludes every golden id from training.** The weak-label pool and the golden pool
-   come from the same 20k rows and overlap by construction — measured at 160/160 in the
-   test fixture. Without the guard the baseline is tested on its own training data.
+2. **B2 trains on dev only and never reads test.** The two splits were fixed before any
+   label existed; the test fixture asserts a test-split label cannot reach training.
+3. **The trivial baseline reads its majority class from dev, not test.** A "trivial"
+   baseline that peeks at the answer key's own class distribution is not a floor, it is a
+   lie about how hard the task is.
+4. **The judge's evidence is rebuilt from ids, not cached alongside the reply**, so it
+   cannot drift from what the drafter actually saw.
 
-Both are asserted in [`tests/test_offline.py`](tests/test_offline.py).
+All four are asserted in [`tests/test_offline.py`](tests/test_offline.py).
 
 ---
 

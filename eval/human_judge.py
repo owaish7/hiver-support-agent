@@ -69,6 +69,10 @@ def ask(name: str, question: str, hint: str) -> bool:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="system")
+    ap.add_argument("--n", type=int, default=N_JUDGE,
+                    help="how many to rate. 60 is the target; 20 still yields a usable "
+                         "kappa with a wider interval, and a wide real number beats a "
+                         "narrow fabricated one.")
     args = ap.parse_args()
 
     src = RESULTS / f"{args.config}.json"
@@ -79,7 +83,7 @@ def main() -> None:
     items = [(k, v) for k, v in runs.items() if v.get("reply")]
     rng = random.Random(config.SEED + 2)
     rng.shuffle(items)
-    items = items[:N_JUDGE]
+    items = items[:args.n]
 
     out_path = RESULTS / f"human_{args.config}.json"
     done = json.loads(out_path.read_text(encoding="utf-8")) if out_path.exists() else {}
